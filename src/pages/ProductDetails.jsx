@@ -3,23 +3,48 @@ import { useParams } from 'react-router-dom';
 
 function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, handleBackButtonClick, isLoggedIn }) {
     const waLink = `https://wa.me/${product.phoneNum}`;
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+    const openImageModal = (index) => {
+        setSelectedImageIndex(index);
+        setIsImageModalOpen(true);
+    };
+
+    const closeImageModal = () => {
+        setIsImageModalOpen(false);
+    };
+
     return (
         <div className="container mx-auto px-4 py-8 flex">
             <div className="w-1/2 mr-8">
                 <h2 className="text-3xl font-semibold mb-4">Product Images</h2>
-                <div className="relative">
-                    <img
-                        src={product.productImgs[currentImageIndex]}
-                        alt={`Product Image ${currentImageIndex + 1}`}
-                        className="w-full h-64 object-cover object-center mb-4"
-                    />
-                    <button
-                        onClick={handleNextImage}
-                        className="absolute bottom-0 right-0 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300"
-                    >
-                        Next Image
-                    </button>
+                <div className="grid grid-cols-3 gap-4">
+                    {product.productImgs.map((imgSrc, index) => (
+                        <img
+                            key={index}
+                            src={imgSrc}
+                            alt={`Product Image ${index + 1}`}
+                            className="w-full h-32 object-cover object-center cursor-pointer"
+                            onClick={() => openImageModal(index)}
+                        />
+                    ))}
                 </div>
+                {isImageModalOpen && (
+                    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 flex justify-center items-center z-50">
+                        <img
+                            src={product.productImgs[selectedImageIndex]}
+                            alt={`Product Image ${selectedImageIndex + 1}`}
+                            className="max-w-full max-h-full"
+                        />
+                        <button
+                            className="absolute top-0 right-0 m-4 text-white text-xl focus:outline-none"
+                            onClick={closeImageModal}
+                        >
+                            Close
+                        </button>
+                    </div>
+                )}
             </div>
             <div className="w-1/2">
                 <h2 className="text-3xl font-semibold mb-4">Product Details</h2>
@@ -36,10 +61,12 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
                                 <li>Hostel Name: {product.hostelName}</li>
                                 <li>UID: {product.uid}</li>
                             </ul>
-                            <a href = {waLink}>Chat on WhatsApp</a>
+                            <a href={waLink}>Chat on WhatsApp</a>
                         </div>
                     ) : (
-                        <p className="text-gray-600 mb-4">Please <a href="/login" className="text-blue-500">login</a> to see uploader details.</p>
+                        <p className="text-gray-600 mb-4">
+                            Please <a href="/login" className="text-blue-500">login</a> to see uploader details.
+                        </p>
                     )}
                 </div>
             </div>
@@ -52,7 +79,6 @@ function withHistory(Component) {
         const { history } = props; // Ensure history prop is received
         const { productId } = useParams();
         const [product, setProduct] = useState(null);
-        const [currentImageIndex, setCurrentImageIndex] = useState(0);
         const [isLoggedIn, setIsLoggedIn] = useState(false);
 
         useEffect(() => {
@@ -84,7 +110,7 @@ function withHistory(Component) {
         };
 
         const handleNextImage = () => {
-            setCurrentImageIndex((prevIndex) => (prevIndex + 1) % (product.productImgs.length || 1)); // Handle empty productImgs
+            // Handle next image logic
         };
 
         const handleBackButtonClick = () => {
@@ -101,7 +127,7 @@ function withHistory(Component) {
             <Component
                 {...props}
                 product={product}
-                currentImageIndex={currentImageIndex}
+                currentImageIndex={0} // Start from the first image
                 handleNextImage={handleNextImage}
                 handleBackButtonClick={handleBackButtonClick}
                 isLoggedIn={isLoggedIn}

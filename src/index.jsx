@@ -8,7 +8,7 @@ import About from './components/About.jsx'
 import Profile from './pages/Profile.jsx'
 import ProductDetails from './pages/ProductDetails.jsx'
 import './index.css'
-// import './tailwind.css'
+// import './tailwind.css'~
 import {
   Route,
   RouterProvider,

@@ -10,8 +10,8 @@ export function NavBar(props) {
       //localStorage.removeItem('user'); // Remove user data from localStorage
        props.setIsLoggedIn(false); // Update isLoggedIn state
 
-      // Make a POST request to the logout endpoint
-      const res = await fetch('https://cu-hostelhub-api.vercel.app/api/v1/users/logout', {
+      // Make a POST request to the; logout endpoint
+      const res = await fetch('http://localhost:8000/api/v1/users/logout', {
           method: 'POST',
           credentials: 'include' // Include credentials (cookies) in the request
       });

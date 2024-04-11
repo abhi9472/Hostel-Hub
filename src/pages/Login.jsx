@@ -21,12 +21,13 @@ function Login() {
     useEffect(() => {
         checkAuthentication();
     }, []); 
+    let temp;
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
 
         try {
-            const response = await axios.post('https://cu-hostelhub-api.vercel.app/api/v1/users/login', {
+            const response = await axios.post('http://localhost:8000/api/v1/users/login', {
                 username_email: username,
                 password: password
             },{
@@ -35,9 +36,10 @@ function Login() {
 
             console.log(response);
 
-            if(response.status == 300){
+            if(response.data.data.isVerified === false){
                 window.location.href='/verify-otp';
             }
+            
             else if (response.status !== 200) {
                 throw new Error('Failed to login ');
                 //throw new Error();
@@ -47,11 +49,15 @@ function Login() {
                 response.data
             );
             console.log(responseData); // Fetch response data
+            temp=response.data.data._id;
+            console.log(temp);
             localStorage.setItem('user', JSON.stringify(responseData)); // Store user data in localStorage
             setIsLoggedIn(true); // Update isLoggedIn state after successful login
 
             window.location.href = '/'; // Navigate to home page after successful login
         } catch (error) {
+            localStorage.setItem('user',temp);
+            // window.location.href='/verify-otp';
             console.error('Login error:', error);
             setError('Failed to login. Please try again || Signup If You Dont Have Account'); // Set error message state
         }

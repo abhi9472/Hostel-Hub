@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 function SignUp() {
   const [formData, setFormData] = useState({
@@ -37,28 +38,19 @@ function SignUp() {
       formDataToSend.append('hostel_name', formData.hostel_name);
       formDataToSend.append('avatar', formData.avatar); // Append avatar file
 
-      const response = await fetch('https://cu-hostelhub-api.vercel.app/api/v1/users/register', {
-        method: 'POST',
-        body: formDataToSend,
-        // Ensure correct content type for multer
-        // No need to set Content-Type, browser will do it automatically
-      });
+      const response = await axios.post('http://localhost:8000/api/v1/users/register', formDataToSend);
 
       console.log(formData);
       console.log(response);
-      if (!response.ok) {
+      if (response.status !== 200) {
         throw new Error('Failed to sign up');
       }
 
       // Handle successful signup, e.g., show success message or redirect
       
-      const responseData = await response.json();
-      console.log(responseData);
+      localStorage.setItem('user', response.data.data._id); // Store access token in localStorage
 
-      localStorage.setItem('user', responseData.data._id); // Store access token in localStorage
-
-       window.location.href = '/verify-otp'
-       
+      window.location.href = '/verify-otp';
        
       console.log('Signup successful');
 
