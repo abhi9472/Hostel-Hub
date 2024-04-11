@@ -43,10 +43,10 @@ export function NavBar(props) {
     <div>
     <header className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-red-500 text-2xl font-bold">HOSTEL HUB</h1>
+      <a href="/" className="text-red-500 text-2xl font-bold">HOSTEL HUB</a>
         <nav>
           <ul className="flex space-x-4 items-center">
-            <li><a href="/" className="text-white hover:text-gray-300">Home</a></li>
+            {/* <li><a href="/" className="text-white hover:text-gray-300">Home</a></li> */}
             {user && (
               <>
                 <li><a href="/profile" className="text-white hover:text-gray-300">Profile</a></li>

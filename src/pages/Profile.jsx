@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import { Link } from 'react-router-dom'; 
 
 function Profile() {
     const [userData, setUserData] = useState(null);
@@ -8,6 +8,7 @@ function Profile() {
     const [selectedOption, setSelectedOption] = useState(null);
     const [newData, setNewData] = useState('');
     const [showInput, setShowInput] = useState(false);
+    const [userProducts, setUserProducts] = useState([]);
 
     useEffect(() => {
         const userId = localStorage.getItem('user');
@@ -25,20 +26,34 @@ function Profile() {
             if (!response.data) {
                 throw new Error(response.data.message);
             }
+            console.log(response);
             setUserData(response.data.data);
+            fetchUserProducts(response.data.data._id);
         } catch (error) {
             console.error('Error fetching user data:', error);
         }
     };
-    
+
+    const fetchUserProducts = async (userId) => {
+        try {
+            const response = await axios.get(`http://localhost:8000/api/v1/product/getUserProducts/`, { withCredentials: true });
+            if (!response.data) {
+                throw new Error(response.data.message);
+            }
+            console.log(response);
+            setUserProducts(response.data.data);
+        } catch (error) {
+            console.error('Error fetching user products:', error);
+        }
+    };
 
     const handleUpdateOption = async () => {
         if (!selectedOption) return;
-    
+
         try {
             let endpoint = '';
             let data = {};
-    
+
             switch (selectedOption) {
                 case 'avatar':
                     const avatarInput = document.getElementById('avatarInput');
@@ -66,31 +81,18 @@ function Profile() {
                     break;
             }
             console.log('New Data:', data);
-    
+
             const response = await axios.patch(endpoint, data, { withCredentials: true });
             console.log(response.data); // Assuming the response contains some data
             console.log('Updated successfully');
-    
+
             // Refresh the profile page
-            window.location.href='/profile'
+            window.location.href = '/profile';
             fetchUserData();
         } catch (error) {
             console.error('Error updating user data:', error);
         }
     };
-    
-    
-    
-    const handleOptionChange = (option) => {
-        // setSelectedOption(option);
-        // setShowInput(true);
-        setSelectedOption(option);
-        setShowInput(true);
-        // Reset newData state when a new option is selected
-        setNewData('');
-        setNewData({ oldPassword: '', newPassword: '' });
-    };
-
     const renderInput = () => {
         switch (selectedOption) {
             case 'avatar':
@@ -117,7 +119,26 @@ function Profile() {
                 return null;
         }
     };
-    
+
+    const handleOptionChange = (option) => {
+        setSelectedOption(option);
+        setShowInput(true);
+        // Reset newData state when a new option is selected
+        setNewData('');
+        setNewData({ oldPassword: '', newPassword: '' });
+    };
+
+    const handleSold = async (productId) => {
+        try {
+            const response = await axios.patch(`http://localhost:8000/api/v1/info/soldOut?id=${productId}`, null, { withCredentials: true });
+            console.log(response.data); // Assuming the response contains some data
+            console.log('Product marked as sold successfully');
+            // Refresh the profile page
+            fetchUserProducts(userData._id);
+        } catch (error) {
+            console.error('Error marking product as sold:', error);
+        }
+    };
 
     if (!isLoggedIn) {
         return <div>User is not logged in.</div>;
@@ -155,6 +176,27 @@ function Profile() {
                     </div>
                 </div>
             </div>
+            <div className="container mx-auto px-4 py-8">
+            <h2 className="text-3xl font-semibold mb-6">User Products</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {userProducts.map((product) => (
+                    <div key={product._id} className="relative bg-white rounded-lg shadow-md overflow-hidden">
+                        <Link to={`/product/${product._id}`} className="block">
+                            <img src={product.coverImg} alt="Cover" className="w-full h-48 object-cover object-center cursor-pointer" />
+                            {/* <h3 className="text-lg font-semibold">{product.name}</h3> */}
+                        </Link>
+                        <div className="p-4">
+                            <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
+                            <p className="text-gray-600 mb-4">{product.description}</p>
+                            <p className="text-lg font-semibold text-blue-500">
+                                Price: ₹ {product.price}
+                            </p>
+                            <button onClick={() => handleSold(product._id)} className="mt-4 bg-red-500 text-white px-4 py-2 rounded">Sold</button>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
         </div>
     );
 }

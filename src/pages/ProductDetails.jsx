@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
-function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, handleBackButtonClick, isLoggedIn }) {
+function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, handlePrevImage, handleBackButtonClick, isLoggedIn }) {
     const waLink = `https://wa.me/${product.phoneNum}`;
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -14,6 +14,22 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
     const closeImageModal = () => {
         setIsImageModalOpen(false);
     };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'ArrowLeft') {
+            handlePrevImage();
+        } else if (e.key === 'ArrowRight') {
+            handleNextImage();
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('keydown', handleKeyDown);
+
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [currentImageIndex]);
 
     return (
         <div className="container mx-auto px-4 py-8 flex">
@@ -31,14 +47,28 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
                     ))}
                 </div>
                 {isImageModalOpen && (
-                    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-75 flex justify-center items-center z-50">
-                        <img
-                            src={product.productImgs[selectedImageIndex]}
-                            alt={`Product Image ${selectedImageIndex + 1}`}
-                            className="max-w-full max-h-full"
-                        />
+                    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
+                        <div className="relative">
+                            <img
+                                src={product.productImgs[selectedImageIndex]}
+                                alt={`Product Image ${selectedImageIndex + 1}`}
+                                className="max-w-full max-h-full"
+                            />
+                            <button
+                                className="absolute top-1/2 transform -translate-y-1/2 left-4 bg-black bg-opacity-50 text-white rounded-full w-10 h-10 flex justify-center items-center"
+                                onClick={handlePrevImage}
+                            >
+                                &lt;
+                            </button>
+                            <button
+                                className="absolute top-1/2 transform -translate-y-1/2 right-4 bg-black bg-opacity-50 text-white rounded-full w-10 h-10 flex justify-center items-center"
+                                onClick={handleNextImage}
+                            >
+                                &gt;
+                            </button>
+                        </div>
                         <button
-                            className="absolute top-0 right-0 m-4 text-white text-xl focus:outline-none"
+                            className="absolute top-4 right-4 bg-black bg-opacity-50 text-white rounded-full px-4 py-2"
                             onClick={closeImageModal}
                         >
                             Close
@@ -80,6 +110,7 @@ function withHistory(Component) {
         const { productId } = useParams();
         const [product, setProduct] = useState(null);
         const [isLoggedIn, setIsLoggedIn] = useState(false);
+        const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
         useEffect(() => {
             fetchProductDetails(productId);
@@ -110,7 +141,11 @@ function withHistory(Component) {
         };
 
         const handleNextImage = () => {
-            // Handle next image logic
+            setCurrentImageIndex(prevIndex => (prevIndex + 1) % product.productImgs.length);
+        };
+
+        const handlePrevImage = () => {
+            setCurrentImageIndex(prevIndex => (prevIndex === 0 ? product.productImgs.length - 1 : prevIndex - 1));
         };
 
         const handleBackButtonClick = () => {
@@ -127,8 +162,9 @@ function withHistory(Component) {
             <Component
                 {...props}
                 product={product}
-                currentImageIndex={0} // Start from the first image
+                currentImageIndex={currentImageIndex}
                 handleNextImage={handleNextImage}
+                handlePrevImage={handlePrevImage}
                 handleBackButtonClick={handleBackButtonClick}
                 isLoggedIn={isLoggedIn}
             />
