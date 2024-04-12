@@ -24,7 +24,6 @@ function Login() {
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
-    
         try {
             const response = await axios.post('http://localhost:8000/api/v1/users/login', {
                 username_email: username,
@@ -47,8 +46,10 @@ function Login() {
                 throw new Error('Failed to login ');
             }
         } catch (error) {
+            // console.log()
+            
             console.error('Login error:', error);
-            setError('Failed to login. Please try again || Signup If You Dont Have Account'); // Set error message state
+            setError("Invalid Credentials || Sign Up if you dont have account"); // Set error message state
         }
     };
     
@@ -66,7 +67,7 @@ function Login() {
                         {error && <p className="text-red-500 text-xs italic mb-2">{error}</p>}
                         <div className="mb-4">
                             <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="username">
-                                Username
+                                Username || Email
                             </label>
                             <input
                                 className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
