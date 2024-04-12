@@ -17,7 +17,7 @@ function VerifyOTP() {
     e.preventDefault();
     try {
       // Fetch user from localStorage
-      const user = localStorage.getItem('user');
+      const user = localStorage.getItem('User');
       if (!user) {
         throw new Error('User not found in localStorage');
       }

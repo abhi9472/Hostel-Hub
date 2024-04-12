@@ -21,11 +21,10 @@ function Login() {
     useEffect(() => {
         checkAuthentication();
     }, []); 
-    let temp;
 
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
-
+    
         try {
             const response = await axios.post('http://localhost:8000/api/v1/users/login', {
                 username_email: username,
@@ -33,37 +32,26 @@ function Login() {
             },{
                 withCredentials: true
             });
-
+    
             console.log(response);
-
+    
             if(!response.data.data.isVerified){
+                localStorage.setItem('User', response.data.data._id); // Store user data in localStorage
                 window.location.href='/verify-otp';
-            }
-            
-            else if (response.status !== 200) {
+            } else if (response.status === 200) {
+                localStorage.removeItem('User');
+                localStorage.setItem('user', JSON.stringify(response.data.data)); // Store user data in localStorage
+                window.location.href = '/';
+                setIsLoggedIn(true); // Update isLoggedIn state after successful login
+            } else {
                 throw new Error('Failed to login ');
-                //throw new Error();
             }
-            const responseData = response.data.data;
-            console.log(
-                response.data
-            );
-            console.log(responseData); // Fetch response data
-            temp=response.data.data._id;
-            console.log(temp);
-            localStorage.setItem('user', JSON.stringify(responseData)); // Store user data in localStorage
-            setIsLoggedIn(true); // Update isLoggedIn state after successful login
-
-            window.location.href = '/'; // Navigate to home page after successful login
         } catch (error) {
-
-            // localStorage.setItem('user',temp);
-            // window.location.href='/verify-otp';
-            // console.log(temp)
             console.error('Login error:', error);
             setError('Failed to login. Please try again || Signup If You Dont Have Account'); // Set error message state
         }
     };
+    
 
     
     const handleForgotPassword = () => {

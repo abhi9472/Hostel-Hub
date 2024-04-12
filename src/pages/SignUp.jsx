@@ -48,7 +48,7 @@ function SignUp() {
 
       // Handle successful signup, e.g., show success message or redirect
       
-      localStorage.setItem('user', response.data.data._id); // Store access token in localStorage
+      localStorage.setItem('User', response.data.data._id); // Store access token in localStorage
 
       window.location.href = '/verify-otp';
        
