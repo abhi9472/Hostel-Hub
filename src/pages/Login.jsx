@@ -56,39 +56,18 @@ function Login() {
 
             window.location.href = '/'; // Navigate to home page after successful login
         } catch (error) {
+            
             localStorage.setItem('user',temp);
             // window.location.href='/verify-otp';
+            console.log(temp)
             console.error('Login error:', error);
             setError('Failed to login. Please try again || Signup If You Dont Have Account'); // Set error message state
         }
     };
 
-    const handleLogout = async () => {
-        try {
-            // Clear user data from localStorage
-            localStorage.removeItem('user');
-
-            // Make a POST request to the logout endpoint
-            const res = await fetch('https://cu-hostelhub-api.vercel.app/api/v1/users/logout', {
-                method: 'POST',
-                credentials: 'include' // Include credentials (cookies) in the request
-            });
-           // with credentials:true
-            // Check if the response is ok
-            if (res.ok) {
-                console.log('Logout successful');
-                // If the request is successful, redirect to home page
-                navigate('/'); // Navigate to home page after logout
-            } else {
-                // Handle non-successful responses
-                const data = await res.json();
-                console.error('Logout failed:', data.message);
-                // Display an error message to the user or perform any other necessary actions
-            }
-        } catch (error) {
-            console.error('Logout failed:', error.message);
-            // Handle any errors or display a message to the user
-        } 
+    
+    const handleForgotPassword = () => {
+        navigate('/forgot-password'); // Redirect to forgot password page
     };
 
         return (
@@ -130,6 +109,13 @@ function Login() {
                             >
                                 Login
                             </button>
+                            <button
+                            className="text-gray-600 font-bold text-sm focus:outline-none"
+                            type="button"
+                            onClick={handleForgotPassword}
+                        >
+                            Forgot Password?
+                        </button>
                         </div>
                     </form>
                 </div>

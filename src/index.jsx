@@ -17,6 +17,9 @@ import {
 } from 'react-router-dom'
 import AddProduct from './pages/AddProduct.jsx'
 import VerifyOTP from './pages/VerifyOtp.jsx'
+import ForgotPassword from './pages/ForgotPassword.jsx'
+import ChangePassword from './pages/ChangePassword.jsx'
+import VerifyForgotOtp from './pages/VerifyForgotOtp.jsx'
 
 // Define setIsLoggedIn function if not defined already
 const setIsLoggedIn = (isLoggedIn) => {
@@ -32,6 +35,13 @@ const router = createBrowserRouter(
       <Route path='/login' element={<Login setIsLoggedIn={setIsLoggedIn} />} />
       <Route path='/addproduct' element={<AddProduct/>}/>
       <Route path ='/verify-otp' element={<VerifyOTP/>}/>
+      <Route path ='/forgot-password' element={<ForgotPassword/>}/>
+      <Route path ='/change-password' element={<ChangePassword/>}/>
+      <Route path ='/verify-forgot-otp' element={<VerifyForgotOtp/>}/>
+
+
+
+
 
       <Route path="/product/:productId" element={<ProductDetails />} />
 
