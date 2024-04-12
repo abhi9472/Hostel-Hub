@@ -14,7 +14,7 @@ function ChangePassword() {
                 return;
             }
 
-            const user = localStorage.getItem('user');
+            const user = localStorage.getItem('User');
 
             // Send request to backend to reset password
             const response = await axios.post('http://localhost:8000/api/v1/users/newPassword', {

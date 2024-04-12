@@ -17,6 +17,9 @@ export function NavBar(props) {
       });
      // with credentials:true
       // Check if the response is ok
+      localStorage.removeItem('user');
+      window.location.href = '/'; 
+      
       if (res.ok) {
           console.log('Logout successful');
           localStorage.removeItem('user');

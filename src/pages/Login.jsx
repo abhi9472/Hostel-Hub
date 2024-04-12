@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 
 function Login() {
     const navigate = useNavigate();
+    localStorage.removeItem('User');
+    localStorage.removeItem('productId');
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
@@ -25,12 +27,15 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
         try {
+            
             const response = await axios.post('http://localhost:8000/api/v1/users/login', {
                 username_email: username,
                 password: password
             },{
                 withCredentials: true
             });
+
+
     
             console.log(response);
     
