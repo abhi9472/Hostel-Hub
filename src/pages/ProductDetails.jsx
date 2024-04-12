@@ -33,49 +33,49 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
 
     return (
         <div className="container mx-auto px-4 py-8 flex">
-            <div className="w-1/2 mr-8">
-                <h2 className="text-3xl font-semibold mb-4">Product Images</h2>
-                <div className="grid grid-cols-3 gap-4">
-                    {product.productImgs.map((imgSrc, index) => (
-                        <img
-                            key={index}
-                            src={imgSrc}
-                            alt={`Product Image ${index + 1}`}
-                            className="w-full h-32 object-cover object-center cursor-pointer"
-                            onClick={() => openImageModal(index)}
-                        />
-                    ))}
-                </div>
-                {isImageModalOpen && (
-                    <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
-                        <div className="relative">
-                            <img
-                                src={product.productImgs[selectedImageIndex]}
-                                alt={`Product Image ${selectedImageIndex + 1}`}
-                                className="max-w-full max-h-full"
-                            />
-                            <button
-                                className="absolute top-1/2 transform -translate-y-1/2 left-4 bg-black bg-opacity-50 text-white rounded-full w-10 h-10 flex justify-center items-center"
-                                onClick={handlePrevImage}
-                            >
-                                &lt;
-                            </button>
-                            <button
-                                className="absolute top-1/2 transform -translate-y-1/2 right-4 bg-black bg-opacity-50 text-white rounded-full w-10 h-10 flex justify-center items-center"
-                                onClick={handleNextImage}
-                            >
-                                &gt;
-                            </button>
-                        </div>
-                        <button
-                            className="absolute top-4 right-4 bg-black bg-opacity-50 text-white rounded-full px-4 py-2"
-                            onClick={closeImageModal}
-                        >
-                            Close
-                        </button>
-                    </div>
-                )}
+        <div className="w-1/2 mr-8">
+            <h2 className="text-3xl font-semibold mb-4">Product Images</h2>
+            <div className="grid grid-cols-3 gap-4">
+                {product.productImgs.map((imgSrc, index) => (
+                    <img
+                        key={index}
+                        src={imgSrc}
+                        alt={`Product Image ${index + 1}`}
+                        className="w-full h-32 object-cover object-center cursor-pointer"
+                        onClick={() => openImageModal(index)}
+                    />
+                ))}
             </div>
+            {isImageModalOpen && (
+                <div className="fixed top-0 left-0 w-full h-full flex justify-center items-center z-50">
+                    <div className="relative">
+                        <button
+                            className="absolute top-1/2 transform -translate-y-1/2 left-4 bg-black bg-opacity-50 text-white rounded-full w-10 h-10 flex justify-center items-center"
+                            onClick={handlePrevImage} // Use the provided handlePrevImage function
+                        >
+                            &lt;
+                        </button>
+                        <button
+                            className="absolute top-1/2 transform -translate-y-1/2 right-4 bg-black bg-opacity-50 text-white rounded-full w-10 h-10 flex justify-center items-center"
+                            onClick={handleNextImage} // Use the provided handleNextImage function
+                        >
+                            &gt;
+                        </button>
+                        <img
+                            src={product.productImgs[selectedImageIndex]}
+                            alt={`Product Image ${selectedImageIndex + 1}`}
+                            className="max-w-full max-h-full"
+                        />
+                    </div>
+                    <button
+                        className="absolute top-4 right-4 bg-black bg-opacity-50 text-white rounded-full px-4 py-2"
+                        onClick={closeImageModal}
+                    >
+                        Close
+                    </button>
+                </div>
+            )}
+        </div>
             <div className="w-1/2">
                 <h2 className="text-3xl font-semibold mb-4">Product Details</h2>
                 <div className="bg-white rounded-lg shadow-md overflow-hidden p-4">
@@ -87,6 +87,8 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
                             <p className="text-lg font-semibold mb-2">Uploader Details:</p>
                             <ul className="mb-4">
                                 <li>Username: {product.username}</li>
+                                {/* <li>Username: {product.name}</li> */}
+
                                 <li>Phone Number: {product.phoneNum}</li>
                                 <li>Hostel Name: {product.hostelName}</li>
                                 <li>UID: {product.uid}</li>
@@ -119,7 +121,7 @@ function withHistory(Component) {
 
         const fetchProductDetails = async (productId) => {
             try {
-                const response = await fetch(`https://cu-hostelhub-api.vercel.app/api/v1/product/get-product?id=${productId}`);
+                const response = await fetch(`http://localhost:8000/api/v1/product/get-product?id=${productId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch product details');
                 }
@@ -139,19 +141,16 @@ function withHistory(Component) {
                 setIsLoggedIn(true); // Update isLoggedIn state if user is logged in
             }
         };
-
         const handleNextImage = () => {
             setCurrentImageIndex(prevIndex => (prevIndex + 1) % product.productImgs.length);
         };
-
+    
         const handlePrevImage = () => {
             setCurrentImageIndex(prevIndex => (prevIndex === 0 ? product.productImgs.length - 1 : prevIndex - 1));
         };
-
+    
         const handleBackButtonClick = () => {
-            if (history) {
-                history.goBack(); // Check if history is defined before calling goBack
-            }
+            history.goBack();
         };
 
         if (!product) {

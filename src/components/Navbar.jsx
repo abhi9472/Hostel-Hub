@@ -40,18 +40,16 @@ export function NavBar(props) {
   const user = localStorage.getItem('user');
 
   return (
-    <div>
     <header className="bg-gray-800 p-4">
       <div className="container mx-auto flex justify-between items-center">
-      <a href="/" className="text-red-500 text-2xl font-bold">HOSTEL HUB</a>
+        <a href="/" className="text-red-500 text-2xl font-bold">HOSTEL HUB</a>
         <nav>
           <ul className="flex space-x-4 items-center">
-            {/* <li><a href="/" className="text-white hover:text-gray-300">Home</a></li> */}
             {user && (
               <>
                 <li><a href="/profile" className="text-white hover:text-gray-300">Profile</a></li>
                 <li><a href="/addproduct" className="text-white hover:text-gray-300">Add Product</a></li>
-                <li className="text-center">
+                <li className="relative">
                   <button onClick={handleLogout} className="bg-black text-white px-4 py-2 rounded-md hover:bg-gray-700">Logout</button>
                 </li>
               </>
@@ -66,8 +64,5 @@ export function NavBar(props) {
         </nav>
       </div>
     </header>
-  </div>
-  
-  )
-
+  );
 }
