@@ -36,7 +36,7 @@ function Login() {
 
             console.log(response);
 
-            if(response.data.data.isVerified === false){
+            if(!response.data.data.isVerified){
                 window.location.href='/verify-otp';
             }
             
@@ -56,10 +56,10 @@ function Login() {
 
             window.location.href = '/'; // Navigate to home page after successful login
         } catch (error) {
-            
-            localStorage.setItem('user',temp);
+
+            // localStorage.setItem('user',temp);
             // window.location.href='/verify-otp';
-            console.log(temp)
+            // console.log(temp)
             console.error('Login error:', error);
             setError('Failed to login. Please try again || Signup If You Dont Have Account'); // Set error message state
         }
