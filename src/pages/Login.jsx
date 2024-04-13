@@ -79,8 +79,10 @@ function Login() {
                                 id="username"
                                 type="text"
                                 value={username}
+                               
                                 onChange={(e) => setUsername(e.target.value)}
                                 required
+                                minLength={5}
                             />
                         </div>
                         <div className="mb-6">
@@ -92,8 +94,11 @@ function Login() {
                                 id="password"
                                 type="password"
                                 value={password}
+                                
+
                                 onChange={(e) => setPassword(e.target.value)}
                                 required
+                                minLength={8}
                             />
                         </div>
                         <div className="flex items-center justify-between">

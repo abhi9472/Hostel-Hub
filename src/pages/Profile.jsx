@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 
 function Profile() {
     const [userData, setUserData] = useState(null);
@@ -26,7 +26,7 @@ function Profile() {
             if (!response.data) {
                 throw new Error(response.data.message);
             }
-             console.log(response);
+            console.log(response);
             setUserData(response.data.data);
             fetchUserProducts(response.data.data._id);
         } catch (error) {
@@ -131,7 +131,7 @@ function Profile() {
     const handleSold = async (productId) => {
         try {
             const response = await axios.patch(`http://localhost:8000/api/v1/info/soldOut?id=${productId}`, null, { withCredentials: true });
-             console.log(response.data); // Assuming the response contains some data
+            console.log(response.data); // Assuming the response contains some data
             console.log('Product marked as sold successfully');
             // Refresh the profile page
             fetchUserProducts(userData._id);
@@ -142,11 +142,11 @@ function Profile() {
 
     const handleRemove = async (productId) => {
         try {
-            const response = await axios.patch(`http://localhost:8000/api/v1/info/removeProduct?id=${productId}`,null, { withCredentials: true });
+            const response = await axios.patch(`http://localhost:8000/api/v1/info/removeProduct?id=${productId}`, null, { withCredentials: true });
             console.log(response.data); // Assuming the response contains some data
-            
+
             console.log('Product deleted successfully');
-            
+
             // Refresh the profile page
             fetchUserProducts(userData._id);
 
@@ -168,7 +168,7 @@ function Profile() {
             <h2 className="text-3xl font-semibold mb-6">User Profile</h2>
             <div className="flex items-center bg-white shadow-lg rounded-lg p-6 relative border border-black">
                 <div className="w-32 h-32 rounded-full overflow-hidden mr-6">
-                    <img className="w-full h-full object-cover" src={userData.avatar} alt="Avatar" />
+                    <img className="w-full h-full" src={userData.avatar} alt="Avatar" />
                 </div>
                 <div>
                     <p className="text-2xl font-bold">{userData.name}</p>
