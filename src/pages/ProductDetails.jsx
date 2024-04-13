@@ -39,17 +39,17 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
             const productId = localStorage.getItem('productId');
             const response = await axios.post(`http://localhost:8000/api/v1/users/requestProduct?id=${productId}`, null, { withCredentials: true });
             alert("Request sent to Uploader") // Assuming the response contains some data
-            
+
             console.log('Request sent to contact uploader');
-    
+
             // Handle any further actions upon successful request
-            
+
         } catch (error) {
             console.error('Error contacting uploader:', error);
             // Handle error if necessary
         }
     };
-    
+
     return (
         <div className="container mx-auto px-4 py-8 flex">
             <div className="w-1/2 mr-8">
@@ -153,7 +153,7 @@ function withHistory(Component) {
                 console.log(response);
                 const fetchedProductId = productData._id;
 
-        // Save product ID to local storage
+                // Save product ID to local storage
                 localStorage.setItem('productId', fetchedProductId);
                 // pid=
                 // localStorage.setItem('productid',response.data.data.)
@@ -203,3 +203,4 @@ function withHistory(Component) {
 const ProductDetails = withHistory(ProductDetailsComponent);
 
 export default ProductDetails;
+
