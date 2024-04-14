@@ -4,6 +4,9 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function VerifyOTP() {
+    const [isLoading, setIsLoading] = useState(false);
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
   const [otp, setOTP] = useState('');
   const [error, setError] = useState('');
 
@@ -16,6 +19,9 @@ function VerifyOTP() {
   const handleVerifyOTP = async (e) => {
     e.preventDefault();
     try {
+        setIsSubmitting(true);
+
+        setIsLoading(true); 
       // Fetch user from localStorage
       const user = localStorage.getItem('User');
       if (!user) {
@@ -27,6 +33,7 @@ function VerifyOTP() {
         id: user,
         OTP: otp
       });
+      setIsLoading(false);
       //let f = 0;
       console.log(response.data); // Log the response data for debugging
       //console.error('Error verifying OTP:', error.response); // Log full error response
@@ -49,6 +56,9 @@ function VerifyOTP() {
 
       setError('OTP verification failed'); // Set error message
     }
+    finally {
+        setIsSubmitting(false); // Reset the form submission state
+      }
   };
 
   return (
@@ -69,8 +79,12 @@ function VerifyOTP() {
         <button
             type="submit"
             className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+            disabled={isLoading || isSubmitting}
         >
             Verify OTP
+            {isLoading ? 'Loading...' :''}
+            {isSubmitting ? '' :''}
+
         </button>
     </form>
 </div>
