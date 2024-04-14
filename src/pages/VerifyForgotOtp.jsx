@@ -24,7 +24,7 @@ function VerifyForgotOtp() {
             }
 
             // Send OTP verification request
-            const response = await axios.post('https://cu-hostelhub-api.vercel.app/api/v1/users/verifyForgetOTP', {
+            const response = await axios.post('http://localhost:8000/api/v1/users/verifyForgetOTP', {
                 id: user,
                 OTP: otp
             });

@@ -29,7 +29,7 @@ function VerifyOTP() {
       }
 
       // Send OTP verification request
-      const response = await axios.post('https://cu-hostelhub-api.vercel.app/api/v1/users/verifyOTP', {
+      const response = await axios.post('http://localhost:8000/api/v1/users/verifyOTP', {
         id: user,
         OTP: otp
       });

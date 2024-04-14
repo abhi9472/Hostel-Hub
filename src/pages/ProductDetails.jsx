@@ -37,7 +37,7 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
     const contactUploader = async () => {
         try {
             const productId = localStorage.getItem('productId');
-            const response = await axios.post(`https://cu-hostelhub-api.vercel.app/api/v1/users/requestProduct?id=${productId}`, null, { withCredentials: true });
+            const response = await axios.post(`http://localhost:8000/api/v1/users/requestProduct?id=${productId}`, null, { withCredentials: true });
             alert("Request sent to Uploader") // Assuming the response contains some data
 
             console.log('Request sent to contact uploader');
@@ -101,21 +101,28 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
                     <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                     <p className="text-gray-600 mb-4">{product.description}</p>
                     <p className="text-lg font-semibold text-blue-500">Price: ₹ {product.price}</p>
+                    <p className="text-gray-600 mb-4">{product.hostelName}</p>
+
                     {isLoggedIn ? (
-                        <div>
-                            <p className="text-lg font-semibold mb-2">Uploader Details:</p>
-                            <ul className="mb-4">
-                                <li>Username: {product.username}</li>
-                                <li>Hostel Name: {product.hostelName}</li>
-                                <li>UID: {product.uid}</li>
-                            </ul>
-                            <button
-                                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                onClick={contactUploader}
-                            >
-                                Contact Uploader
-                            </button>
-                            {isRequestSent && <p className="text-green-500">Request sent to uploader!</p>}
+                         <div>
+                         {product.isAnonymous ? (
+                             <button
+                                 className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                 onClick={contactUploader}
+                             >
+                                 Contact Uploader
+                             </button>
+                         ) : (
+                             <div>
+                                 <p className="text-lg font-semibold mb-2">Uploader Details:</p>
+                                 <ul className="mb-4">
+                                     <li>Name: {product.username}</li>
+                                     <li>Hostel Name: {product.hostelName}</li>
+                                     <li>Mob No: {product.phoneNum}</li>
+                                 </ul>
+                                 {isRequestSent && <p className="text-green-500">Request sent to uploader!</p>}
+                             </div>
+                            )}
                         </div>
                     ) : (
                         <p className="text-gray-600 mb-4">
@@ -144,13 +151,13 @@ function withHistory(Component) {
 
         const fetchProductDetails = async (productId) => {
             try {
-                const response = await fetch(`https://cu-hostelhub-api.vercel.app/api/v1/product/get-product?id=${productId}`);
+                const response = await fetch(`http://localhost:8000/api/v1/product/get-product?id=${productId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch product details');
                 }
                 const responseData = await response.json();
                 const productData = responseData.data || null;
-                console.log(response);
+                console.log(responseData);
                 const fetchedProductId = productData._id;
 
                 // Save product ID to local storage

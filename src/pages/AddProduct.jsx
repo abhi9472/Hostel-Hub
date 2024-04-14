@@ -39,7 +39,7 @@ function AddProduct() {
             });
             formData.append("isAnonymous", isAnonymous);
 
-            const url = "https://cu-hostelhub-api.vercel.app/api/v1/product/addProducts"; // Replace with your endpoint URL
+            const url = "http://localhost:8000/api/v1/product/addProducts"; // Replace with your endpoint URL
             const response = await axios.post(url, formData, {
                 headers: {
                     "Content-Type": "multipart/form-data",

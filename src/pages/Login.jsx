@@ -28,7 +28,7 @@ function Login() {
         e.preventDefault(); // Prevent default form submission behavior
         try {
             
-            const response = await axios.post('https://cu-hostelhub-api.vercel.app/api/v1/users/login', {
+            const response = await axios.post('http://localhost:8000/api/v1/users/login', {
                 username_email: username,
                 password: password
             },{

@@ -13,7 +13,7 @@ function ForgotPassword() {
         
 
         try {
-            const response = await axios.post('https://cu-hostelhub-api.vercel.app/api/v1/users/forgetPassword', {
+            const response = await axios.post('http://localhost:8000/api/v1/users/forgetPassword', {
                 email: email
             });
 

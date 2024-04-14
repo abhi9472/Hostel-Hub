@@ -17,7 +17,7 @@ function ChangePassword() {
             const user = localStorage.getItem('User');
 
             // Send request to backend to reset password
-            const response = await axios.post('https://cu-hostelhub-api.vercel.app/api/v1/users/newPassword', {
+            const response = await axios.post('http://localhost:8000/api/v1/users/newPassword', {
                 userID: user, // Fetch email from localStorage where it was stored during the forgot password process
                 password: password
             });

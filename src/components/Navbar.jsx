@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 
- export function NavBar(props) {
+export function NavBar(props) {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef(null);
   const timerRef = useRef(null);
@@ -33,7 +33,7 @@ import React, { useState, useRef } from 'react';
       props.setIsLoggedIn(false); // Update isLoggedIn state
 
       // Make a POST request to the; logout endpoint
-      const res = await fetch('https://cu-hostelhub-api.vercel.app/api/v1/users/logout', {
+      const res = await fetch('http://localhost:8000/api/v1/users/logout', {
         method: 'POST',
         credentials: 'include' // Include credentials (cookies) in the request
       });
@@ -63,16 +63,30 @@ import React, { useState, useRef } from 'react';
   const user = JSON.parse(localStorage.getItem('user'));
 
   return (
-    <header className="bg-gray-100 shadow-white-800 p-4">
+    <header className="bg-gray-200 shadow-3xl p-4">
 
       <div className="container mx-auto flex justify-between items-center">
-        <a href="/" className="bg-gray-200 text-2xl font-bold">HOSTEL HUB</a>
+        <a href="/" className="text-2xl font-bold">HOSTEL HUB</a>
 
         <nav className="flex items-center space-x-4">
           <ul className="flex space-x-4 items-center">
-            <li><a href="/" className="text-black hover:text-gray-300">Home</a></li>
+            <li>
+              <a href="/" className="flex items-center text-black hover:text-gray-300">
+                <img className="h-5 w-5 mr-1" src="/home-01_generated-removebg-preview (1).png" alt="Home Icon" />
+               
+              </a>
+            </li>
+
             {user && (
-              <li><a href="/addproduct" className="text-black hover:text-gray-300">Add Product</a></li>
+            <li>
+            <a href="/addproduct" className="flex items-center text-black hover:text-gray-300">
+              <img className="h-5 w-5 mr-1 rounded-full" src="/add.svg" alt="Add Product Icon" style={{ fontWeight: 'bold' }} />
+           
+            </a>
+          </li>
+          
+           
+           
             )}
           </ul>
 
