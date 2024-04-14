@@ -37,7 +37,7 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
     const contactUploader = async () => {
         try {
             const productId = localStorage.getItem('productId');
-            const response = await axios.post(`http://localhost:8000/api/v1/users/requestProduct?id=${productId}`, null, { withCredentials: true });
+            const response = await axios.post(`https://cu-hostelhub-api.vercel.app/api/v1/users/requestProduct?id=${productId}`, null, { withCredentials: true });
             alert("Request sent to Uploader") // Assuming the response contains some data
 
             console.log('Request sent to contact uploader');
