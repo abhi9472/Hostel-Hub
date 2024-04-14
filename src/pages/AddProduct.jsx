@@ -88,7 +88,9 @@ function AddProduct() {
 
     return (
         <div className="container mx-auto p-3">
-            <h2 className="text-3xl font-semibold mb-6">ADD PRODUCT</h2>
+            <div className="container mx-auto p-3 flex justify-center items-center">
+                <h2 className="text-3xl font-semibold mb-6">ADD PRODUCT</h2>
+            </div>
             <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden p-6 border border-white">
                 <label className="block mb-2">Product Name</label>
                 <input
