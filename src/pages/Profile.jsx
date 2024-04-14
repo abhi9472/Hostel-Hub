@@ -22,7 +22,7 @@ function Profile() {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/v1/users/getUser', { withCredentials: true });
+            const response = await axios.get('https://cu-hostelhub-api.vercel.app/api/v1/users/getUser', { withCredentials: true });
             if (!response.data) {
                 throw new Error(response.data.message);
             }
@@ -36,7 +36,7 @@ function Profile() {
 
     const fetchUserProducts = async (userId) => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/v1/product/getUserProducts/`, { withCredentials: true });
+            const response = await axios.get(`https://cu-hostelhub-api.vercel.app/api/v1/product/getUserProducts/`, { withCredentials: true });
             if (!response.data) {
                 throw new Error(response.data.message);
             }
@@ -64,17 +64,17 @@ function Profile() {
                     const avatarFile = avatarInput.files[0];
                     const formDataAvatar = new FormData();
                     formDataAvatar.append('avatar', avatarFile);
-                    endpoint = 'http://localhost:8000/api/v1/info/updateAvatar';
+                    endpoint = 'https://cu-hostelhub-api.vercel.app/api/v1/info/updateAvatar';
                     data = formDataAvatar;
                     break;
                 case 'password':
                     if (!newData.oldPassword || !newData.newPassword) return;
-                    endpoint = 'http://localhost:8000/api/v1/info/updatePass';
+                    endpoint = 'https://cu-hostelhub-api.vercel.app/api/v1/info/updatePass';
                     data = { oldPassword: newData.oldPassword, newPassword: newData.newPassword };
                     break;
                 case 'hostel':
                     if (!newData) return;
-                    endpoint = 'http://localhost:8000/api/v1/info/updateHostel';
+                    endpoint = 'https://cu-hostelhub-api.vercel.app/api/v1/info/updateHostel';
                     data = { newHostel: newData };
                     break;
                 default:
@@ -130,7 +130,7 @@ function Profile() {
 
     const handleSold = async (productId) => {
         try {
-            const response = await axios.patch(`http://localhost:8000/api/v1/info/soldOut?id=${productId}`, null, { withCredentials: true });
+            const response = await axios.patch(`https://cu-hostelhub-api.vercel.app/api/v1/info/soldOut?id=${productId}`, null, { withCredentials: true });
             console.log(response.data); // Assuming the response contains some data
             console.log('Product marked as sold successfully');
             // Refresh the profile page
@@ -142,7 +142,7 @@ function Profile() {
 
     const handleRemove = async (productId) => {
         try {
-            const response = await axios.patch(`http://localhost:8000/api/v1/info/removeProduct?id=${productId}`, null, { withCredentials: true });
+            const response = await axios.patch(`https://cu-hostelhub-api.vercel.app/api/v1/info/removeProduct?id=${productId}`, null, { withCredentials: true });
             console.log(response.data); // Assuming the response contains some data
 
             console.log('Product deleted successfully');

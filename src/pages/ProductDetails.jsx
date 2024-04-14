@@ -144,7 +144,7 @@ function withHistory(Component) {
 
         const fetchProductDetails = async (productId) => {
             try {
-                const response = await fetch(`http://localhost:8000/api/v1/product/get-product?id=${productId}`);
+                const response = await fetch(`https://cu-hostelhub-api.vercel.app/api/v1/product/get-product?id=${productId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch product details');
                 }
