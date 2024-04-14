@@ -70,9 +70,9 @@ import React, { useState, useRef } from 'react';
 
         <nav className="flex items-center space-x-4">
           <ul className="flex space-x-4 items-center">
-            <li><a href="/" className="text-white hover:text-gray-300">Home</a></li>
+            <li><a href="/" className="text-black hover:text-gray-300">Home</a></li>
             {user && (
-              <li><a href="/addproduct" className="text-white hover:text-gray-300">Add Product</a></li>
+              <li><a href="/addproduct" className="text-black hover:text-gray-300">Add Product</a></li>
             )}
           </ul>
 
@@ -120,8 +120,8 @@ import React, { useState, useRef } from 'react';
           {/* Display Login and Sign Up links if user is not logged in */}
           {!user && (
             <ul className="flex space-x-4 items-center">
-              <li><a href="/login" className="text-white hover:text-gray-300">Login</a></li>
-              <li><a href="/signup" className="text-white hover:text-gray-300">Sign Up</a></li>
+              <li><a href="/login" className="text-black hover:text-gray-300">Login</a></li>
+              <li><a href="/signup" className="text-black hover:text-gray-300">Sign Up</a></li>
             </ul>
           )}
         </nav>
