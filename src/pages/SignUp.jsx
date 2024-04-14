@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function SignUp() {
-  const [isLoading, setIsLoading] = useState(false);
+  // const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     username: '',
@@ -30,7 +30,7 @@ function SignUp() {
     e.preventDefault();
     try {
       setIsSubmitting(true);
-      setIsLoading(true);
+      // setIsLoading(true);
       const formDataToSend = new FormData();
       formDataToSend.append('username', formData.username);
       formDataToSend.append('name', formData.name);
@@ -43,7 +43,7 @@ function SignUp() {
       formDataToSend.append('avatar', formData.avatar); // Append avatar file
 
       const response = await axios.post('http://localhost:8000/api/v1/users/register', formDataToSend);
-      setIsLoading(false);
+      // setIsLoading(false);
 
       console.log(formData);
       console.log(response);
@@ -192,11 +192,10 @@ function SignUp() {
           type="submit"
           className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
           // disabled={isLoading}
-          disabled={isLoading || isSubmitting}
+          disabled={isSubmitting}
         >
-           {isLoading ? 'Loading...' : ''}
-           {isSubmitting ? '' : ''}
-          Sign Up
+           {/* {isLoading ? 'Loading...' : ''} */}
+           {isSubmitting ? "Loading..." : "Sign Up"}
         </button>
       </form>
     </div>

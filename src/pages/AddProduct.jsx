@@ -68,7 +68,7 @@ function AddProduct() {
         }
         finally {
             setIsSubmitting(false); // Reset the form submission state
-          }
+        }
     };
 
     const handleCoverImageChange = (e) => {
@@ -89,7 +89,7 @@ function AddProduct() {
     return (
         <div className="container mx-auto p-3">
             <h2 className="text-3xl font-semibold mb-6">ADD PRODUCT</h2>
-            <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden p-6 border border-black">
+            <div className="max-w-md mx-auto bg-white shadow-md rounded-lg overflow-hidden p-6 border border-white">
                 <label className="block mb-2">Product Name</label>
                 <input
                     className="form-input border border-black w-full mb-4"
@@ -98,11 +98,11 @@ function AddProduct() {
                     onChange={(e) => setProductName(e.target.value)}
                 />
                 <label className="block mb-2">Product Description</label>
-                <input
-                    className="form-input border border-black w-full mb-4"
-                    type="text"
+                <textarea
+                    className="form-textarea border border-black w-full mb-4"
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
+                    rows={5} // Adjust the number of rows as needed
                 />
                 <label className="block mb-2">Product Price</label>
                 <input
@@ -125,7 +125,7 @@ function AddProduct() {
                     multiple
                 />
                 <label className="block mb-2">Is the product anonymous?</label>
-                
+
                 <div className="flex items-center space-x-4 mb-4">
                     <button className={`bg-gray-300 hover:bg-gray-400 py-2 px-4 rounded ${isAnonymous === 1 ? 'bg-blue-500 hover:bg-blue-600 text-white' : ''}`} onClick={() => setIsAnonymous(1)}>Yes</button>
                     <button className={`bg-gray-300 hover:bg-gray-400 py-2 px-4 rounded ${isAnonymous === 0 ? 'bg-blue-500 hover:bg-blue-600 text-white' : ''}`} onClick={() => setIsAnonymous(0)}>No</button>
