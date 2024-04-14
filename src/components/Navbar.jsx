@@ -83,7 +83,7 @@ import React, { useState, useRef } from 'react';
               onMouseLeave={handleMouseLeave}
             >
               <button className="flex items-center focus:outline-none relative">
-                <span className="text-white mr-2">{user.name}</span>
+                {/* <span className="text-white mr-2">{user.name}</span> */}
                 <img
                   src={user.avatar}
                   alt="Profile"
