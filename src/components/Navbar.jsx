@@ -66,7 +66,7 @@ import React, { useState, useRef } from 'react';
     <header className="bg-gray-100 shadow-white-800 p-4">
 
       <div className="container mx-auto flex justify-between items-center">
-        <a href="/" className="text-red-500 text-2xl font-bold">HOSTEL HUB</a>
+        <a href="/" className="bg-gray-200 text-2xl font-bold">HOSTEL HUB</a>
 
         <nav className="flex items-center space-x-4">
           <ul className="flex space-x-4 items-center">
