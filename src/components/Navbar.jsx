@@ -13,7 +13,7 @@ import React, { useState, useRef } from 'react';
   const handleMouseLeave = () => {
     timerRef.current = setTimeout(() => {
       setIsDropdownOpen(false);
-    }, 500); // Adjust the delay as needed
+    }, 100); // Adjust the delay as needed
   };
 
   const handleOptionMouseEnter = () => {

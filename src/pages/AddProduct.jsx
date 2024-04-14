@@ -2,10 +2,13 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function AddProduct() {
+    const [isSubmitting, setIsSubmitting] = useState(false);
+
     const [productName, setProductName] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [coverImg, setCoverImg] = useState(null);
+    const [isAnonymous, setIsAnonymous] = useState(null);
     const [productImgs, setProductImgs] = useState([]);
     const [isLoggedIn, setIsLoggedIn] = useState(true); // Default to true, assuming user is logged in
 
@@ -19,6 +22,13 @@ function AddProduct() {
 
     const handleApi = async () => {
         try {
+            setIsSubmitting(true);
+            if (isAnonymous === null) {
+                alert("Please select an option for anonymity.");
+                setIsSubmitting(false); // Display error message if no selection is made
+                return;
+            }
+
             const formData = new FormData();
             formData.append("productName", productName);
             formData.append("description", description);
@@ -27,6 +37,7 @@ function AddProduct() {
             productImgs.forEach((image) => {
                 formData.append("productImg", image);
             });
+            formData.append("isAnonymous", isAnonymous);
 
             const url = "http://localhost:8000/api/v1/product/addProducts"; // Replace with your endpoint URL
             const response = await axios.post(url, formData, {
@@ -46,6 +57,8 @@ function AddProduct() {
             setPrice("");
             setCoverImg(null);
             setProductImgs([]);
+            setIsAnonymous(null);
+            setIsSubmitting(false);
             window.location.href = '/';
 
 
@@ -53,6 +66,9 @@ function AddProduct() {
             console.error("Error adding product:", error);
             alert("Failed to add product. Please try again.");
         }
+        finally {
+            setIsSubmitting(false); // Reset the form submission state
+          }
     };
 
     const handleCoverImageChange = (e) => {
@@ -108,8 +124,15 @@ function AddProduct() {
                     onChange={handleProductImageChange}
                     multiple
                 />
-                <button onClick={handleApi} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded">
-                    SUBMIT
+                <label className="block mb-2">Is the product anonymous?</label>
+                
+                <div className="flex items-center space-x-4 mb-4">
+                    <button className={`bg-gray-300 hover:bg-gray-400 py-2 px-4 rounded ${isAnonymous === 1 ? 'bg-blue-500 hover:bg-blue-600 text-white' : ''}`} onClick={() => setIsAnonymous(1)}>Yes</button>
+                    <button className={`bg-gray-300 hover:bg-gray-400 py-2 px-4 rounded ${isAnonymous === 0 ? 'bg-blue-500 hover:bg-blue-600 text-white' : ''}`} onClick={() => setIsAnonymous(0)}>No</button>
+                </div>
+                {isSubmitting && isAnonymous === null && <p className="text-red-500">Please select an option for anonymity.</p>}
+                <button onClick={handleApi} className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded" disabled={isSubmitting}>
+                    {isSubmitting ? "Submitting..." : "SUBMIT"}
                 </button>
             </div>
         </div>
