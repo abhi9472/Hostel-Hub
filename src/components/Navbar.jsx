@@ -63,7 +63,8 @@ import React, { useState, useRef } from 'react';
   const user = JSON.parse(localStorage.getItem('user'));
 
   return (
-    <header className="bg-gray-800 p-4">
+    <header className="bg-gray-100 shadow-white-800 p-4">
+
       <div className="container mx-auto flex justify-between items-center">
         <a href="/" className="text-red-500 text-2xl font-bold">HOSTEL HUB</a>
 
