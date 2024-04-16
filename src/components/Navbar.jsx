@@ -72,15 +72,15 @@ export function NavBar(props) {
           <ul className="flex space-x-4 items-center">
             <li>
               <a href="/" className="flex items-center text-black hover:text-gray-300">
-                <img className="h-5 w-5 mr-1" src="/home-01_generated-removebg-preview (1).png" alt="Home Icon" />
-               
+                <img className="h-5 w-5 mr-1" src="/homee.png" alt="Home Icon" />
+              
               </a>
             </li>
 
             {user && (
             <li>
             <a href="/addproduct" className="flex items-center text-black hover:text-gray-300">
-              <img className="h-5 w-5 mr-1 rounded-full" src="/add.svg" alt="Add Product Icon" style={{ fontWeight: 'bold' }} />
+              <img className="h-5 w-5 mr-1 rounded-full" src="/addd.png" alt="Add Product Icon" style={{ fontWeight: 'bold' }} />
            
             </a>
           </li>
