@@ -9,8 +9,14 @@ function Profile() {
     const [newData, setNewData] = useState('');
     const [showInput, setShowInput] = useState(false);
     const [userProducts, setUserProducts] = useState([]);
-    const [showUpdatePriceInput, setShowUpdatePriceInput] = useState(false);
-    const [newPrice, setNewPrice] = useState('');
+    const [showUpdatePriceInputs, setShowUpdatePriceInputs] = useState({}); // Store state for each product separately
+    const [newPriceData, setNewPriceData] = useState({}); // Store updated pric
+    const [updatedProductNames, setUpdatedProductNames] = useState({}); // Store updated names for each product
+    const [showUpdateNameInput, setShowUpdateNameInput] = useState(false);
+
+
+
+
 
     useEffect(() => {
         const userId = localStorage.getItem('user');
@@ -25,8 +31,8 @@ function Profile() {
     const fetchUserData = async () => {
         try {
             const response = await axios.get('http://localhost:8000/api/v1/users/getUser', { withCredentials: true });
-            if (!response.data) {
-                throw new Error(response.data.message);
+            if (!response.data || !response.data.data) {
+                throw new Error("No user data found");
             }
             setUserData(response.data.data);
             fetchUserProducts(response.data.data._id);
@@ -34,7 +40,6 @@ function Profile() {
             console.error('Error fetching user data:', error);
         }
     };
-
     const fetchUserProducts = async (userId) => {
         try {
             const response = await axios.get(`http://localhost:8000/api/v1/product/getUserProducts/`, { withCredentials: true });
@@ -85,7 +90,7 @@ function Profile() {
             const response = await axios.patch(endpoint, data, { withCredentials: true });
             console.log('Updated successfully');
 
-           window.location.href=('/profile');
+            window.location.href = ('/profile');
             fetchUserData();
         } catch (error) {
             console.error('Error updating user data:', error);
@@ -134,7 +139,7 @@ function Profile() {
             console.log('Product marked as sold successfully');
             alert("Product Solded");
             // Refresh the profile page
-            window.location.href=('/profile');
+            window.location.href = ('/profile');
 
             fetchUserProducts(userData._id);
         } catch (error) {
@@ -151,7 +156,7 @@ function Profile() {
             alert("Product Deleted");
             // Refresh the profile page
             fetchUserProducts(userData._id);
-            window.location.href=('/profile');
+            window.location.href = ('/profile');
 
 
         } catch (error) {
@@ -161,10 +166,10 @@ function Profile() {
 
     const handleUpdatePrice = async (productId) => {
         try {
-            if (!newPrice || isNaN(newPrice)) {
+            if (!newPriceData[productId] || isNaN(newPriceData[productId])) {
                 throw new Error('Please enter a valid price.');
             }
-            const response = await axios.patch(`http://localhost:8000/api/v1/info/updatePrice?id=${productId}`,{ productPrice: newPrice }, { withCredentials: true });
+            const response = await axios.patch(`http://localhost:8000/api/v1/info/updatePrice?id=${productId}`, { productPrice: newPriceData[productId] }, { withCredentials: true });
             console.log(response.data); // Assuming the response contains some data
 
             console.log('Product price updated successfully');
@@ -172,14 +177,28 @@ function Profile() {
 
             // Refresh the profile page
             fetchUserProducts(userData._id);
-             window.location.href=('/profile');
+            window.location.href = ('/profile');
 
-           
+
 
         } catch (error) {
             console.error('Error updating product price:', error);
         }
     };
+    const handleUpdateProductName = async (productId) => {
+        try {
+            const response = await axios.patch(`http://localhost:8000/api/v1/info/updateName?id=${productId}`, { productName: updatedProductNames[productId] }, { withCredentials: true });
+            console.log(response.data); // Assuming the response contains some data
+            console.log('Product name updated successfully');
+            alert("Product Name Updated");
+            // Refresh the profile page
+             window.location.href = '/profile';
+            fetchUserProducts(userData._id);
+        } catch (error) {
+            console.error('Error updating product name:', error);
+        }
+    };
+
 
     if (!isLoggedIn) {
         return <div>User is not logged in.</div>;
@@ -235,6 +254,7 @@ function Profile() {
                             <Link to={`/product/${product._id}`} className="block">
                                 <img src={product.coverImg} alt="Cover" className="w-full h-48 object-cover object-center cursor-pointer" />
                             </Link>
+
                             <div className="p-4">
                                 <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                                 <p className="text-gray-600 mb-4">{product.description}</p>
@@ -245,27 +265,45 @@ function Profile() {
                                     {/* Sold button */}
                                     <button onClick={() => handleSold(product._id)} style={{ padding: '4px', border: 'none', background: 'none' }}>
                                         <img src="/sold.png" alt="Sold Icon" style={{ width: '24px', height: '24px' }} />
-                                    </button> 
+                                    </button>
                                     {/* Remove button */}
                                     <button onClick={() => handleRemove(product._id)} style={{ padding: '4px', border: 'none', background: 'none' }}>
                                         <img src="/remove.png" alt="Remove Icon" style={{ width: '24px', height: '24px' }} />
                                     </button>
                                     {/* Update price button */}
-                                    <button onClick={() => setShowUpdatePriceInput(true)} style={{ padding: '4px', border: 'none', background: 'none' }}>
+                                    <button onClick={() => setShowUpdatePriceInputs({ ...showUpdatePriceInputs, [product._id]: true })} style={{ padding: '4px', border: 'none', background: 'none' }}>
                                         <img src="/price.png" alt="Update Price Icon" style={{ width: '24px', height: '24px' }} />
                                     </button>
+                                    <button onClick={() => setShowUpdateNameInput(prevState => ({ ...prevState, [product._id]: true }))} style={{ padding: '4px', border: 'none', background: 'none' }}>
+                                        <img src="/namee.png" alt="Update Name Icon" style={{ width: '24px', height: '24px' }} />
+                                    </button>
+
+
                                 </div>
+
                                 {/* Input field for updating price */}
-                                {showUpdatePriceInput && (
+                                {showUpdatePriceInputs[product._id] && (
                                     <div className="flex items-center mt-2">
                                         <input
                                             type="number"
                                             placeholder="New Price"
-                                            value={newPrice}
-                                            onChange={(e) => setNewPrice(e.target.value)}
+                                            value={newPriceData[product._id] || ''}
+                                            onChange={(e) => setNewPriceData({ ...newPriceData, [product._id]: e.target.value })}
                                             style={{ backgroundColor: 'white', color: 'black', border: '1px solid black', width: '100px' }}
                                         />
                                         <button onClick={() => handleUpdatePrice(product._id)} className="bg-blue-500 text-white px-2 py-1 rounded-md ml-2">Update Price</button>
+                                    </div>
+                                )}
+                                {showUpdateNameInput[product._id] && (
+                                    <div className="flex items-center mt-2">
+                                        <input
+                                            type="text"
+                                            placeholder="New Name"
+                                            value={updatedProductNames[product._id] || ''}
+                                            onChange={(e) => setUpdatedProductNames({ ...updatedProductNames, [product._id]: e.target.value })}
+                                            style={{ backgroundColor: 'white', color: 'black', border: '1px solid black', width: '160px' }}
+                                        />
+                                        <button onClick={() => handleUpdateProductName(product._id)} className="bg-blue-500 text-white px-2 py-1 rounded-md ml-2">Update Name</button>
                                     </div>
                                 )}
                             </div>
