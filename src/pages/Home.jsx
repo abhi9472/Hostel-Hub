@@ -14,11 +14,8 @@ function Home() {
 
   useEffect(() => {
 
-    return () => {
-      // console.log("in useeffect")
       fetchProducts();
       fetchProductsForSlider();
-    }
 
   }, []);
 
