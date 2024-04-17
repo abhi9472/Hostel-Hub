@@ -8,15 +8,14 @@ import 'slick-carousel/slick/slick-theme.css';
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const [sliderProducts, setSilderProducts] = useState([])
   const [loading,setLoading] = useState(false)
   // const [carouselProducts, setCarouselProducts] = useState([]);
 
 
   useEffect(() => {
-
       fetchProducts();
       fetchProductsForSlider();
-
   }, []);
 
   const fetchProductsForSlider = async () => {
@@ -29,7 +28,7 @@ function Home() {
       const responseData = await response.json();
       // console.log(responseData);
       const sliderProducts = responseData.data || [];
-      setProducts(sliderProducts);
+      setSilderProducts(sliderProducts);
       setLoading(false)
     } catch (error) {
       setLoading(false)
@@ -97,7 +96,7 @@ function Home() {
         <h2 className="text-3xl font-semibold mb-6">Featured Products</h2>
         <div className="overflow-hidden">
           <Carousel {...settings}>
-            {!loading && products.map((product) => (
+            {!loading && sliderProducts.map((product) => (
               <div key={product._id} className="px-4">
                 <Link to={`/product/${product._id}`} className="block">
                   <div className="w-24 h-16 relative overflow-hidden rounded-md">
@@ -145,9 +144,6 @@ function Home() {
             ))}
           </div>
         </div>
-
-
-
       </div>
     </div>
   )
