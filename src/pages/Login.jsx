@@ -64,7 +64,7 @@ function Login() {
     };
 
     return (
-        <div className="flex justify-center items-center min-h-screen" style={{ backgroundImage: `url('/bg2.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
+        <div className="flex justify-center items-center min-h-screen" style={{ backgroundImage: `url('https://img.freepik.com/free-photo/desk-concept-cyber-monday_23-2148292116.jpg?w=1800&t=st=1713384818~exp=1713385418~hmac=9f979eb376c7ac696c59609dae229106a0e25cea9cff6ffc18f4f99323299ab8')`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
             <div className="w-full max-w-xs bg-offwhite shadow-md p-8 mt-[-120px]">
                 <form onSubmit={handleLogin}>
                     <h2 className="text-2xl text-center mb-6">Login</h2>
