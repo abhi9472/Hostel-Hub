@@ -137,7 +137,7 @@ export function NavBar(props) {
           {!user && (
             <ul className="flex space-x-4 items-center">
               <li><a href="/login" className="text-black hover:text-gray-300">Login</a></li>
-              <li><a href="/signup" className="text-black hover:text-gray-300">Sign Up</a></li>
+              {/* <li><a href="/signup" className="text-black hover:text-gray-300">Sign Up</a></li> */}
             </ul>
           )}
         </nav>

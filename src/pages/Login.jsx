@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'; // Import Axios library
+import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-
 
 function Login() {
     const navigate = useNavigate();
@@ -11,12 +10,12 @@ function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
-    const [isLoggedIn, setIsLoggedIn] = useState(false); // Add isLoggedIn state
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const checkAuthentication = () => {
         const userId = localStorage.getItem('user');
         if (userId) {
-            setIsLoggedIn(true); // Update isLoggedIn state if user is logged in
+            setIsLoggedIn(true);
         }
     };
 
@@ -25,7 +24,7 @@ function Login() {
     }, []); 
 
     const handleLogin = async (e) => {
-        e.preventDefault(); // Prevent default form submission behavior
+        e.preventDefault();
         try {
             const response = await axios.post('https://hostelhub-backend.onrender.com/api/v1/users/login', {
                 username_email: username,
@@ -34,33 +33,29 @@ function Login() {
                 withCredentials: true
             });
 
-
-    
-            console.log(response);
-    
-            if(!response.data.data.isVerified){
-                localStorage.setItem('User', response.data.data._id); // Store user data in localStorage
-                window.location.href='/verify-otp';
+            if (!response.data.data.isVerified) {
+                localStorage.setItem('User', response.data.data._id);
+                window.location.href = '/verify-otp';
             } else if (response.status === 200) {
                 localStorage.removeItem('User');
-                localStorage.setItem('user', JSON.stringify(response.data.data)); // Store user data in localStorage
+                localStorage.setItem('user', JSON.stringify(response.data.data));
                 window.location.href = '/';
-                setIsLoggedIn(true); // Update isLoggedIn state after successful login
+                setIsLoggedIn(true);
             } else {
-                throw new Error('Failed to login ');
+                throw new Error('Failed to login');
             }
         } catch (error) {
-            // console.log()
-            
             console.error('Login error:', error);
-            setError("Invalid Credentials || Sign Up if you dont have account"); // Set error message state
+            setError("Invalid Credentials || Sign Up if you don't have an account");
         }
     };
-    
 
-    
     const handleForgotPassword = () => {
-        navigate('/forgot-password'); // Redirect to forgot password page
+        navigate('/forgot-password');
+    };
+
+    const handleSignUp = () => {
+        navigate('/signup'); // Navigate to signup page
     };
 
     return (
@@ -112,12 +107,15 @@ function Login() {
                             Forgot Password?
                         </button>
                     </div>
+                    {!isLoggedIn && ( // Render signup link if not logged in
+                        <p className="mt-4 text-center text-sm">
+                            Don't have an account? <span className="text-blue-500 cursor-pointer" onClick={handleSignUp}>Sign Up</span>
+                        </p>
+                    )}
                 </form>
             </div>
         </div>
     );
-    
-}    
+}
 
-    
-    export default Login;
+export default Login;
