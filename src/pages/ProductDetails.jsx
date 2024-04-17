@@ -51,16 +51,16 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
     };
 
     return (
-        <div className={`container mx-auto px-4 py-8 flex ${isImageModalOpen ? 'overflow-hidden' : ''}`}>
-            <div className="w-1/2 mr-8">
-                <h2 className="text-3xl font-semibold mb-4">Product Images</h2>
-                <div className="grid grid-cols-3 gap-4">
+        <div className={`container mx-auto px-4 py-8 flex-col gap-16 items-center justify-between ${isImageModalOpen ? 'overflow-hidden' : ''}`}>
+            <div className="flex-grow">
+                {/* <h2 className="text-3xl font-semibold mb-4">Product Images</h2> */}
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                     {product.productImgs.map((imgSrc, index) => (
                         <img
                             key={index}
                             src={imgSrc}
                             alt={`Product Image ${index + 1}`}
-                            className="w-full h-32 object-cover object-center cursor-pointer relative"
+                            className="w-full h-48 rounded-md shadow-lg object-cover object-center cursor-pointer relative"
                             onClick={() => openImageModal(index)}
                         />
                     ))}
@@ -72,7 +72,7 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
                                 <img
                                     src={product.productImgs[selectedImageIndex]}
                                     alt={`Product Image ${selectedImageIndex + 1}`}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full object-contain"
                                 />
                                 <button
                                     className="absolute top-2 right-2 bg-black bg-opacity-70 text-white rounded-full p-2 z-60"
@@ -85,19 +85,16 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
                         <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 backdrop-filter backdrop-blur-lg z-40"></div>
                     </>
                 )}
-                {/* </div>
-        </div> */}
 
             </div >
-            <div className="w-1/2">
-                <h2 className="text-3xl font-semibold mb-4">Product Details</h2>
+            <div className="flex-grow">
+                {/* <h2 className="text-3xl font-semibold mb-4">Product Details</h2> */}
                 <div className="bg-white rounded-lg shadow-md overflow-hidden p-4">
                     <h3 className="text-lg font-semibold mb-2">{product.name}</h3>
                     <p className="text-gray-600 mb-4">{product.description}</p>
                     <p className="text-lg font-semibold text-blue-500">Price: ₹ {product.price}</p>
                     <p className="text-gray-600 mb-4"> Hostel Name :{product.hostelName}</p>
                     {/* <p className="text-gray-600 mb-4"> Hostel Name :{product.hostelName}</p> */}
-
 
 
                     {isLoggedIn ? (
