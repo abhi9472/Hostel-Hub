@@ -66,7 +66,9 @@ export function NavBar(props) {
     <header className="bg-gray-200 shadow-3xl p-4">
 
       <div className="container mx-auto flex justify-between items-center">
-        <a href="/" className="text-2xl font-bold">HOSTEL HUB</a>
+      <a href="/" className="text-2xl font-bold">
+  <img src="/logo2.png" alt="Your Logo" className="h-10 w-25" />
+</a>
 
         <nav className="flex items-center space-x-4">
           <ul className="flex space-x-4 items-center">
