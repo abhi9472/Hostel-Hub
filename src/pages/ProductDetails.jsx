@@ -75,10 +75,10 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
                                     className="w-full h-full object-contain"
                                 />
                                 <button
-                                    className="absolute top-2 right-2 bg-black bg-opacity-70 text-white rounded-full p-2 z-60"
+                                    className="absolute -top-16 right-4 bg-black bg-opacity-70 text-white rounded-full p-2 px-4 z-60"
                                     onClick={closeImageModal}
                                 >
-                                    Close
+                                    X
                                 </button>
                             </div>
                         </div>
