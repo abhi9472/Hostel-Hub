@@ -8,18 +8,23 @@ import 'slick-carousel/slick/slick-theme.css';
 
 function Home() {
   const [products, setProducts] = useState([]);
+  const [loading,setLoading] = useState(false)
   // const [carouselProducts, setCarouselProducts] = useState([]);
 
 
   useEffect(() => {
-    fetchProducts();
-    // fetchCarouselProducts();
-    fetchProductsForSlider();
 
+    return () => {
+      // console.log("in useeffect")
+      fetchProducts();
+      fetchProductsForSlider();
+    }
 
   }, []);
+
   const fetchProductsForSlider = async () => {
     try {
+      setLoading(true)
       const response = await fetch('https://hostelhub-backend.onrender.com/api/v1/product/productBanner');
       if (!response.ok) {
         throw new Error('Failed to fetch slider products');
@@ -28,29 +33,31 @@ function Home() {
       // console.log(responseData);
       const sliderProducts = responseData.data || [];
       setProducts(sliderProducts);
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.error('Error fetching slider products:', error);
     }
   };
+
   const fetchProducts = async () => {
     try {
+      setLoading(true)
       const response = await fetch('https://hostelhub-backend.onrender.com/api/v1/product/allProducts');
       if (!response.ok) {
         throw new Error('Failed to fetch products');
       }
       const responseData = await response.json();
-      // console.log(responseData);
-
+      console.log(responseData);
       const productData = responseData.data || [];
-      setProducts(productData);
+      setProducts(productData)
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
       console.error('Error fetching products:', error);
     }
   };
 
-  if (products.length === 0) {
-    return <div>No Products</div>;
-  }
   const settings = {
     dots: true,
     infinite: true,
@@ -93,7 +100,7 @@ function Home() {
         <h2 className="text-3xl font-semibold mb-6">Featured Products</h2>
         <div className="overflow-hidden">
           <Carousel {...settings}>
-            {products.map((product) => (
+            {!loading && products.map((product) => (
               <div key={product._id} className="px-4">
                 <Link to={`/product/${product._id}`} className="block">
                   <div className="w-24 h-16 relative overflow-hidden rounded-md">
@@ -114,7 +121,7 @@ function Home() {
         <div className="container mx-auto px-4 py-8">
           <h2 className="text-3xl font-semibold mb-6">New Products</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {products.length > 0 && products.map((product) => (
+            {!loading && products.map((product) => (
               <div
                 key={product._id}
                 className="relative bg-white rounded-lg shadow-md overflow-hidden"
