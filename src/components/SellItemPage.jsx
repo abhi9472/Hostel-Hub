@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
 function SellItemPage() {
   const [itemData, setItemData] = useState({
-    itemName: '',
-    price: '',
-    imagePath: '',
-    description: ''
+    itemName: "",
+    price: "",
+    imagePath: "",
+    description: "",
   });
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -17,38 +17,38 @@ function SellItemPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('YOUR_BACKEND_SELL_ENDPOINT', {
-        method: 'POST',
+      const response = await fetch("YOUR_BACKEND_SELL_ENDPOINT", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
         body: JSON.stringify(itemData),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to sell item');
+        throw new Error("Failed to sell item");
       }
 
       // Clear form fields after successful sell
       setItemData({
-        itemName: '',
-        price: '',
-        imagePath: '',
-        description: ''
+        itemName: "",
+        price: "",
+        imagePath: "",
+        description: "",
       });
-      
+
       // Optionally, display a success message to the user
-      console.log('Item sold successfully');
+      console.log("Item sold successfully");
     } catch (error) {
-      console.error('Error selling item:', error.message);
-      setError('Failed to sell item');
+      console.error("Error selling item:", error.message);
+      setError("Failed to sell item");
     }
   };
 
   return (
     <div>
       <h2>Sell Item</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      {error && <p style={{ color: "red" }}>{error}</p>}
       <form onSubmit={handleSubmit}>
         <div>
           <label>Item Name:</label>

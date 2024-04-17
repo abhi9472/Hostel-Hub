@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 function SignUp() {
   // const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    username: '',
-    name: '',
-    uid: '',
-    gender: '',
-    email: '',
-    phoneNum: '',
-    hostel_name: '',
-    password: '',
-    avatar: null
+    username: "",
+    name: "",
+    uid: "",
+    gender: "",
+    email: "",
+    phoneNum: "",
+    hostel_name: "",
+    password: "",
+    avatar: null,
   });
 
   const handleChange = (e) => {
@@ -32,50 +32,53 @@ function SignUp() {
       setIsSubmitting(true);
       // setIsLoading(true);
       const formDataToSend = new FormData();
-      formDataToSend.append('username', formData.username);
-      formDataToSend.append('name', formData.name);
-      formDataToSend.append('uid', formData.uid);
-      formDataToSend.append('gender', formData.gender);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('password', formData.password);
-      formDataToSend.append('phoneNum', formData.phoneNum);
-      formDataToSend.append('hostel_name', formData.hostel_name);
-      formDataToSend.append('avatar', formData.avatar); // Append avatar file
+      formDataToSend.append("username", formData.username);
+      formDataToSend.append("name", formData.name);
+      formDataToSend.append("uid", formData.uid);
+      formDataToSend.append("gender", formData.gender);
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("password", formData.password);
+      formDataToSend.append("phoneNum", formData.phoneNum);
+      formDataToSend.append("hostel_name", formData.hostel_name);
+      formDataToSend.append("avatar", formData.avatar); // Append avatar file
 
-      const response = await axios.post('https://hostelhub-backend.onrender.com/api/v1/users/register', formDataToSend);
+      const response = await axios.post(
+        "https://hostelhub-backend.onrender.com/api/v1/users/register",
+        formDataToSend,
+      );
       // setIsLoading(false);
 
       console.log(formData);
       console.log(response);
       if (response.status !== 200) {
-        throw new Error('Failed to sign up');
+        throw new Error("Failed to sign up");
       }
 
       // Handle successful signup, e.g., show success message or redirect
 
-      localStorage.setItem('User', response.data.data._id); // Store access token in localStorage
+      localStorage.setItem("User", response.data.data._id); // Store access token in localStorage
 
-      window.location.href = '/verify-otp';
+      window.location.href = "/verify-otp";
 
-      console.log('Signup successful');
+      console.log("Signup successful");
 
       //window.location.href = '/login'
     } catch (error) {
-      console.error('Error signing up:', error.message);
+      console.error("Error signing up:", error.message);
       // Handle signup error, e.g., display error message to the user
-    }
-    finally {
+    } finally {
       setIsSubmitting(false); // Reset the form submission state
     }
   };
 
-
   return (
-    <div className="max-w-lg mx-auto mt-8 p-6 bg-white rounded shadow-md">
-      <h2 className="text-2xl mb-4">Signup</h2>
+    <div className="mx-auto mt-8 max-w-lg rounded bg-white p-6 shadow-md">
+      <h2 className="mb-4 text-2xl">Signup</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block mb-1 font-medium text-gray-700">Username:</label>
+          <label className="mb-1 block font-medium text-gray-700">
+            Username:
+          </label>
           <input
             type="text"
             name="username"
@@ -83,11 +86,11 @@ function SignUp() {
             onChange={handleChange}
             required
             minLength={5}
-            className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium text-gray-700">Name:</label>
+          <label className="mb-1 block font-medium text-gray-700">Name:</label>
           <input
             type="text"
             name="name"
@@ -95,28 +98,30 @@ function SignUp() {
             onChange={handleChange}
             required
             minLength={1}
-            className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium text-gray-700">UID:</label>
+          <label className="mb-1 block font-medium text-gray-700">UID:</label>
           <input
             type="text"
             name="uid"
             value={formData.uid}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium text-gray-700">Gender:</label>
+          <label className="mb-1 block font-medium text-gray-700">
+            Gender:
+          </label>
           <select
             name="gender"
             value={formData.gender}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
           >
             <option value="">Select Gender</option>
             <option value="MALE">MALE</option>
@@ -125,7 +130,9 @@ function SignUp() {
           </select>
         </div>
         <div>
-          <label className="block mb-1 font-medium text-gray-700">Email-CU_Official:</label>
+          <label className="mb-1 block font-medium text-gray-700">
+            Email-CU_Official:
+          </label>
           <input
             type="email"
             name="email"
@@ -133,13 +140,13 @@ function SignUp() {
             onChange={handleChange}
             pattern="[a-zA-Z0-9._%+-]+@(cuchd\.in|cumail\.in)$"
             required
-            className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
           />
-
-
         </div>
         <div>
-          <label className="block mb-1 font-medium text-gray-700">Password-Len(8):</label>
+          <label className="mb-1 block font-medium text-gray-700">
+            Password-Len(8):
+          </label>
           <input
             type="password"
             name="password"
@@ -147,11 +154,13 @@ function SignUp() {
             onChange={handleChange}
             required
             minLength={8}
-            className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium text-gray-700">Phone Number:</label>
+          <label className="mb-1 block font-medium text-gray-700">
+            Phone Number:
+          </label>
           <input
             type="tel"
             name="phoneNum"
@@ -160,17 +169,19 @@ function SignUp() {
             required
             minLength={10}
             maxLength={10}
-            className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
           />
         </div>
         <div>
-          <label className="block mb-1 font-medium text-gray-700">Hostel:</label>
+          <label className="mb-1 block font-medium text-gray-700">
+            Hostel:
+          </label>
           <select
             name="hostel_name"
             value={formData.hostel_name}
             onChange={handleChange}
             required
-            className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
           >
             <option value="">Select Hostel</option>
             <option value="NekChand/Zakir">NekChand/Zakir</option>
@@ -179,23 +190,25 @@ function SignUp() {
           </select>
         </div>
         <div>
-          <label className="block mb-1 font-medium text-gray-700">Profile Picture || Optional:</label>
+          <label className="mb-1 block font-medium text-gray-700">
+            Profile Picture || Optional:
+          </label>
           <input
             type="file"
             name="avatar"
             accept="image/*"
             onChange={handleProfilePicChange}
-            className="w-full px-3 py-2 placeholder-gray-400 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
           />
         </div>
         <button
           type="submit"
-          className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+          className="w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
           // disabled={isLoading}
           disabled={isSubmitting}
         >
-           {/* {isLoading ? 'Loading...' : ''} */}
-           {isSubmitting ? "Loading..." : "Sign Up"}
+          {/* {isLoading ? 'Loading...' : ''} */}
+          {isSubmitting ? "Loading..." : "Sign Up"}
         </button>
       </form>
     </div>

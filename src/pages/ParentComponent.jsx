@@ -1,6 +1,6 @@
-import React from 'react';
-import VerifyOTP from './VerifyOtp';
-import { createBrowserHistory } from 'history';
+import React from "react";
+import VerifyOTP from "./VerifyOtp";
+import { createBrowserHistory } from "history";
 
 function ParentComponent() {
   const history = createBrowserHistory();
