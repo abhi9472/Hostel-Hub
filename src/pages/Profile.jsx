@@ -30,7 +30,7 @@ function Profile() {
 
     const fetchUserData = async () => {
         try {
-            const response = await axios.get('http://localhost:8000/api/v1/users/getUser', { withCredentials: true });
+            const response = await axios.get('https://hostelhub-backend.onrender.com/api/v1/users/getUser', { withCredentials: true });
             if (!response.data || !response.data.data) {
                 throw new Error("No user data found");
             }
@@ -42,7 +42,7 @@ function Profile() {
     };
     const fetchUserProducts = async (userId) => {
         try {
-            const response = await axios.get(`http://localhost:8000/api/v1/product/getUserProducts/`, { withCredentials: true });
+            const response = await axios.get(`https://hostelhub-backend.onrender.com/api/v1/product/getUserProducts/`, { withCredentials: true });
             if (!response.data) {
                 throw new Error(response.data.message);
             }
@@ -69,17 +69,17 @@ function Profile() {
                     const avatarFile = avatarInput.files[0];
                     const formDataAvatar = new FormData();
                     formDataAvatar.append('avatar', avatarFile);
-                    endpoint = 'http://localhost:8000/api/v1/info/updateAvatar';
+                    endpoint = 'https://hostelhub-backend.onrender.com/api/v1/info/updateAvatar';
                     data = formDataAvatar;
                     break;
                 case 'password':
                     if (!newData.oldPassword || !newData.newPassword) return;
-                    endpoint = 'http://localhost:8000/api/v1/info/updatePass';
+                    endpoint = 'https://hostelhub-backend.onrender.com/api/v1/info/updatePass';
                     data = { oldPassword: newData.oldPassword, newPassword: newData.newPassword };
                     break;
                 case 'hostel':
                     if (!newData) return;
-                    endpoint = 'http://localhost:8000/api/v1/info/updateHostel';
+                    endpoint = 'https://hostelhub-backend.onrender.com/api/v1/info/updateHostel';
                     data = { newHostel: newData };
                     break;
                 default:
@@ -134,7 +134,7 @@ function Profile() {
 
     const handleSold = async (productId) => {
         try {
-            const response = await axios.patch(`http://localhost:8000/api/v1/info/soldOut?id=${productId}`, null, { withCredentials: true });
+            const response = await axios.patch(`https://hostelhub-backend.onrender.com/api/v1/info/soldOut?id=${productId}`, null, { withCredentials: true });
             console.log(response.data); // Assuming the response contains some data
             console.log('Product marked as sold successfully');
             alert("Product Solded");
@@ -149,7 +149,7 @@ function Profile() {
 
     const handleRemove = async (productId) => {
         try {
-            const response = await axios.patch(`http://localhost:8000/api/v1/info/removeProduct?id=${productId}`, null, { withCredentials: true });
+            const response = await axios.patch(`https://hostelhub-backend.onrender.com/api/v1/info/removeProduct?id=${productId}`, null, { withCredentials: true });
             console.log(response.data); // Assuming the response contains some data
 
             console.log('Product deleted successfully');
@@ -169,7 +169,7 @@ function Profile() {
             if (!newPriceData[productId] || isNaN(newPriceData[productId])) {
                 throw new Error('Please enter a valid price.');
             }
-            const response = await axios.patch(`http://localhost:8000/api/v1/info/updatePrice?id=${productId}`, { productPrice: newPriceData[productId] }, { withCredentials: true });
+            const response = await axios.patch(`https://hostelhub-backend.onrender.com/api/v1/info/updatePrice?id=${productId}`, { productPrice: newPriceData[productId] }, { withCredentials: true });
             console.log(response.data); // Assuming the response contains some data
 
             console.log('Product price updated successfully');
@@ -187,7 +187,7 @@ function Profile() {
     };
     const handleUpdateProductName = async (productId) => {
         try {
-            const response = await axios.patch(`http://localhost:8000/api/v1/info/updateName?id=${productId}`, { productName: updatedProductNames[productId] }, { withCredentials: true });
+            const response = await axios.patch(`https://hostelhub-backend.onrender.com/api/v1/info/updateName?id=${productId}`, { productName: updatedProductNames[productId] }, { withCredentials: true });
             console.log(response.data); // Assuming the response contains some data
             console.log('Product name updated successfully');
             alert("Product Name Updated");

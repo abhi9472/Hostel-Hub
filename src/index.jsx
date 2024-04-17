@@ -38,13 +38,7 @@ const router = createBrowserRouter(
       <Route path ='/forgot-password' element={<ForgotPassword/>}/>
       <Route path ='/change-password' element={<ChangePassword/>}/>
       <Route path ='/verify-forgot-otp' element={<VerifyForgotOtp/>}/>
-
-
-
-
-
       <Route path="/product/:productId" element={<ProductDetails />} />
-
       <Route path='/signup' element={<Signup/>}/>
       <Route path='/profile' element={<Profile/>}/>
       {/* Define route for logout */}

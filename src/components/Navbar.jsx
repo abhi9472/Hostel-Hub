@@ -33,7 +33,7 @@ export function NavBar(props) {
       props.setIsLoggedIn(false); // Update isLoggedIn state
 
       // Make a POST request to the; logout endpoint
-      const res = await fetch('http://localhost:8000/api/v1/users/logout', {
+      const res = await fetch('https://hostelhub-backend.onrender.com/api/v1/users/logout', {
         method: 'POST',
         credentials: 'include' // Include credentials (cookies) in the request
       });

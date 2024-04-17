@@ -42,7 +42,7 @@ function SignUp() {
       formDataToSend.append('hostel_name', formData.hostel_name);
       formDataToSend.append('avatar', formData.avatar); // Append avatar file
 
-      const response = await axios.post('http://localhost:8000/api/v1/users/register', formDataToSend);
+      const response = await axios.post('https://hostelhub-backend.onrender.com/api/v1/users/register', formDataToSend);
       // setIsLoading(false);
 
       console.log(formData);

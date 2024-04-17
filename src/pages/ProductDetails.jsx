@@ -37,7 +37,7 @@ function ProductDetailsComponent({ product, currentImageIndex, handleNextImage, 
     const contactUploader = async () => {
         try {
             const productId = localStorage.getItem('productId');
-            const response = await axios.post(`http://localhost:8000/api/v1/users/requestProduct?id=${productId}`, null, { withCredentials: true });
+            const response = await axios.post(`https://hostelhub-backend.onrender.com/api/v1/users/requestProduct?id=${productId}`, null, { withCredentials: true });
             alert("Request sent to Uploader") // Assuming the response contains some data
 
             console.log('Request sent to contact uploader');
@@ -157,7 +157,7 @@ function withHistory(Component) {
 
         const fetchProductDetails = async (productId) => {
             try {
-                const response = await fetch(`http://localhost:8000/api/v1/product/get-product?id=${productId}`);
+                const response = await fetch(`https://hostelhub-backend.onrender.com/api/v1/product/get-product?id=${productId}`);
                 if (!response.ok) {
                     throw new Error('Failed to fetch product details');
                 }

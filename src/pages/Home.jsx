@@ -20,7 +20,7 @@ function Home() {
   }, []);
   const fetchProductsForSlider = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/product/productBanner');
+      const response = await fetch('https://hostelhub-backend.onrender.com/api/v1/product/productBanner');
       if (!response.ok) {
         throw new Error('Failed to fetch slider products');
       }
@@ -34,7 +34,7 @@ function Home() {
   };
   const fetchProducts = async () => {
     try {
-      const response = await fetch('http://localhost:8000/api/v1/product/allProducts');
+      const response = await fetch('https://hostelhub-backend.onrender.com/api/v1/product/allProducts');
       // console.log(response);
       if (!response.ok) {
         throw new Error('Failed to fetch products');

@@ -27,8 +27,7 @@ function Login() {
     const handleLogin = async (e) => {
         e.preventDefault(); // Prevent default form submission behavior
         try {
-            
-            const response = await axios.post('http://localhost:8000/api/v1/users/login', {
+            const response = await axios.post('https://hostelhub-backend.onrender.com/api/v1/users/login', {
                 username_email: username,
                 password: password
             },{

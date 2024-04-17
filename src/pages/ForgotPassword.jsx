@@ -13,7 +13,7 @@ function ForgotPassword() {
         
 
         try {
-            const response = await axios.post('http://localhost:8000/api/v1/users/forgetPassword', {
+            const response = await axios.post('https://hostelhub-backend.onrender.com/api/v1/users/forgetPassword', {
                 email: email
             });
 
