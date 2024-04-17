@@ -67,7 +67,7 @@ export function NavBar(props) {
 
       <div className="container mx-auto flex justify-between items-center">
       <a href="/" className="text-2xl font-bold">
-  <img src="/logo2.png" alt="Your Logo" className="h-10 w-25" />
+  <img src="/logo2.png" alt="Your Logo" className="h-10 w-35" />
 </a>
 
         <nav className="flex items-center space-x-4">
