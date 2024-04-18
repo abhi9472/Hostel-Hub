@@ -98,7 +98,8 @@ function Profile() {
       const response = await axios.patch(endpoint, data, {
         withCredentials: true,
       });
-      console.log("Updated successfully");
+      // console.log("Updated successfully");
+      alert("Updated Successfully");
 
       window.location.href = "/profile";
       fetchUserData();
@@ -185,14 +186,22 @@ function Profile() {
   };
 
   const handleSold = async (productId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to mark this product as sold?",
+    );
+
+    if (!confirmed) {
+      // If not confirmed, do nothing
+      return;
+    }
     try {
       const response = await axios.patch(
         `https://hostelhub-backend.onrender.com/api/v1/info/soldOut?id=${productId}`,
         null,
         { withCredentials: true },
       );
-      console.log(response.data); // Assuming the response contains some data
-      console.log("Product marked as sold successfully");
+      // console.log(response.data); // Assuming the response contains some data
+      // console.log("Product marked as sold successfully");
       alert("Product Solded");
       // Refresh the profile page
       window.location.href = "/profile";
@@ -204,6 +213,14 @@ function Profile() {
   };
 
   const handleRemove = async (productId) => {
+    const confirmed = window.confirm(
+      "Are you sure you want to Remove this product?",
+    );
+
+    if (!confirmed) {
+      // If not confirmed, do nothing
+      return;
+    }
     try {
       const response = await axios.patch(
         `https://hostelhub-backend.onrender.com/api/v1/info/removeProduct?id=${productId}`,
