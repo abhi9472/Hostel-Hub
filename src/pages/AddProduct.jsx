@@ -92,34 +92,34 @@ function AddProduct() {
       <div className="mx-auto max-w-md overflow-hidden rounded-lg border border-white bg-white p-6 shadow-md">
         <label className="mb-2 block">Product Name</label>
         <input
-          className="form-input mb-4 w-full border border-black"
+          className="form-input mb-4 w-full border"
           type="text"
           value={productName}
           onChange={(e) => setProductName(e.target.value)}
         />
         <label className="mb-2 block">Product Description</label>
         <textarea
-          className="form-textarea mb-4 w-full border border-black"
+          className="form-textarea mb-4 w-full border"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
           rows={5} // Adjust the number of rows as needed
         />
         <label className="mb-2 block">Product Price</label>
         <input
-          className="form-input mb-4 w-full border border-black"
+          className="form-input mb-4 w-full border"
           type="Number"
           value={price}
           onChange={(e) => setPrice(e.target.value)}
         />
         <label className="mb-2 block">Product Cover Image</label>
         <input
-          className="form-input mb-4 w-full border border-black"
+          className="form-input mb-4 w-full border"
           type="file"
           onChange={handleCoverImageChange}
         />
         <label className="mb-2 block">Product Images</label>
         <input
-          className="form-input mb-4 w-full border border-black"
+          className="form-input mb-4 w-full border"
           type="file"
           onChange={handleProductImageChange}
           multiple
