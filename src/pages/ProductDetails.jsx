@@ -110,7 +110,7 @@ function ProductDetailsComponent({
           </p>
           <p className="mb-4 text-gray-600">
             {/* {" "} */}
-            Hostel Name :{product.hostel_name}
+            Hostel Name :{product.hostelName}
           </p>
           {/* <p className="mb-4 text-gray-600">
             {" "}
@@ -133,7 +133,7 @@ function ProductDetailsComponent({
                   </p>
                   <ul className="mb-4">
                     <li>Name: {product.username}</li>
-                    <li>Hostel Name: {product.hostel_name}</li>
+                    <li>Hostel Name: {product.hostelName}</li>
                     <li>
                       <a
                         href={waLink}
