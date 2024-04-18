@@ -273,7 +273,7 @@ function Profile() {
   return (
     <div className="container mx-auto px-4 py-8">
       {/* User information section */}
-      <div className="relative flex items-center rounded-lg border border-black bg-white p-6 shadow-lg">
+      <div className="relative flex items-center rounded-lg border bg-white p-6 shadow-lg">
         {/* User avatar */}
         <div className="mr-6 h-32 w-32 overflow-hidden rounded-full">
           <img className="h-full w-full" src={userData.avatar} alt="Avatar" />
@@ -289,7 +289,7 @@ function Profile() {
       </div>
 
       {/* Update user information section */}
-      <div className="relative mt-6 flex flex-col rounded-lg border border-black bg-white p-6 shadow-lg">
+      <div className="relative mt-6 flex flex-col rounded-lg border bg-white p-6 shadow-lg">
         {/* Update option select */}
         <label htmlFor="updateOption" className="mb-2 mr-2">
           Update:
