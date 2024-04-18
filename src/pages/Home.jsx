@@ -58,7 +58,7 @@ function Home() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 1500, // Adjust the speed of sliding
+    speed: 2500, // Adjust the speed of sliding
     slidesToShow: 5,
     slidesToScroll: 2,
     autoplay: true, // Enable autoplay
@@ -67,7 +67,7 @@ function Home() {
       {
         breakpoint: 1024,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
           dots: true,
@@ -83,7 +83,7 @@ function Home() {
       {
         breakpoint: 480,
         settings: {
-          slidesToShow: 1,
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
