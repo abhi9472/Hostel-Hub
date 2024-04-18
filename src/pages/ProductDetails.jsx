@@ -103,14 +103,19 @@ function ProductDetailsComponent({
         <div className="overflow-hidden rounded-lg bg-white p-4 shadow-md">
           <h3 className="mb-2 text-lg font-semibold">{product.name}</h3>
           <p className="mb-4 text-gray-600">{product.description}</p>
+          {/* <p className="mb-4 text-gray-600">{product.hostelName}</p> */}
+
           <p className="text-lg font-semibold text-blue-500">
             Price: ₹ {product.price}
           </p>
           <p className="mb-4 text-gray-600">
+            {/* {" "} */}
+            Hostel Name :{product.hostel_name}
+          </p>
+          {/* <p className="mb-4 text-gray-600">
             {" "}
             Hostel Name :{product.hostelName}
-          </p>
-          {/* <p className="text-gray-600 mb-4"> Hostel Name :{product.hostelName}</p> */}
+          </p> */}
 
           {isLoggedIn ? (
             <div>
@@ -128,7 +133,7 @@ function ProductDetailsComponent({
                   </p>
                   <ul className="mb-4">
                     <li>Name: {product.username}</li>
-                    <li>Hostel Name: {product.hostelName}</li>
+                    <li>Hostel Name: {product.hostel_name}</li>
                     <li>
                       <a
                         href={waLink}
