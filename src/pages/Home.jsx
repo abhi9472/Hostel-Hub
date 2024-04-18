@@ -58,9 +58,9 @@ function Home() {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 500, // Adjust the speed of sliding
+    speed: 1500, // Adjust the speed of sliding
     slidesToShow: 5,
-    slidesToScroll: 1,
+    slidesToScroll: 2,
     autoplay: true, // Enable autoplay
     autoplaySpeed: 1000, // Set autoplay speed in milliseconds
     responsive: [

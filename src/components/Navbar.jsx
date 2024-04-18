@@ -68,7 +68,7 @@ export function NavBar(props) {
   return (
     <header className="shadow-3xl bg-gray-200 p-4">
       <div className="container mx-auto flex items-center justify-between">
-        <a href="/" className=" text-2xl font-bold">
+        <a href="/" className="text-2xl font-bold">
           <img src="/logo2.png" alt="Your Logo" className="w-35 h-10" />
         </a>
 
