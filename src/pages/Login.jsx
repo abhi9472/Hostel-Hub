@@ -66,7 +66,7 @@ function Login() {
     <div
       className="flex min-h-screen items-center justify-center"
       style={{
-        backgroundImage: `url('https://img.freepik.com/free-photo/desk-concept-cyber-monday_23-2148292116.jpg?w=1800&t=st=1713384818~exp=1713385418~hmac=9f979eb376c7ac696c59609dae229106a0e25cea9cff6ffc18f4f99323299ab8')`,
+        backgroundImage: `url('https://res.cloudinary.com/don5euayf/image/upload/f_auto,q_auto/zdxhlbkdsxn0umeptvzh')`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
