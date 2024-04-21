@@ -48,8 +48,8 @@ function SignUp() {
       );
       // setIsLoading(false);
 
-      console.log(formData);
-      console.log(response);
+      // console.log(formData);
+      // console.log(response);
       if (response.status !== 200) {
         throw new Error("Failed to sign up");
       }

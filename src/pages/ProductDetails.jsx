@@ -51,7 +51,7 @@ function ProductDetailsComponent({
       );
       alert("Request sent to Uploader"); // Assuming the response contains some data
 
-      console.log("Request sent to contact uploader");
+      // console.log("Request sent to contact uploader");
 
       // Handle any further actions upon successful request
     } catch (error) {

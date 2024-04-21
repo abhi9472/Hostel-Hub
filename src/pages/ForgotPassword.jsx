@@ -19,7 +19,7 @@ function ForgotPassword() {
         },
       );
 
-      console.log(response);
+      // console.log(response);
       localStorage.setItem("User", response.data.data._id); // Store access token in localStorage
 
       if (response.status === 200) {

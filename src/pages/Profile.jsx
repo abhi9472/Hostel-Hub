@@ -93,7 +93,7 @@ function Profile() {
         default:
           break;
       }
-      console.log("New Data:", data);
+      // console.log("New Data:", data);
 
       const response = await axios.patch(endpoint, data, {
         withCredentials: true,
@@ -227,9 +227,9 @@ function Profile() {
         null,
         { withCredentials: true },
       );
-      console.log(response.data); // Assuming the response contains some data
+      // console.log(response.data); // Assuming the response contains some data
 
-      console.log("Product deleted successfully");
+      // console.log("Product deleted successfully");
       alert("Product Deleted");
       // Refresh the profile page
       fetchUserProducts(userData._id);
@@ -268,8 +268,8 @@ function Profile() {
         { productName: updatedProductNames[productId] },
         { withCredentials: true },
       );
-      console.log(response.data); // Assuming the response contains some data
-      console.log("Product name updated successfully");
+      // console.log(response.data); // Assuming the response contains some data
+      // console.log("Product name updated successfully");
       alert("Product Name Updated");
       // Refresh the profile page
       window.location.href = "/profile";

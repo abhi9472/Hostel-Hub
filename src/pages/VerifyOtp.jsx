@@ -77,7 +77,7 @@ function VerifyOTP() {
       
 
       // Handle the response as needed
-      console.log(response.data);
+      // console.log(response.data);
       alert("OTP has been resent successfully!"); // For demonstration
 
       // Disable Resend OTP button and start timer countdown

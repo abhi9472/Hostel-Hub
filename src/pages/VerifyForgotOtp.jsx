@@ -32,7 +32,7 @@ function VerifyForgotOtp() {
         },
       );
       //let f = 0;
-      console.log(response); // Log the response data for debugging
+      // console.log(response); // Log the response data for debugging
       //console.error('Error verifying OTP:', error.response); // Log full error response
 
       console.log("OTP verified successfully");

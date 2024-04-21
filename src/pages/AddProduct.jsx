@@ -79,7 +79,7 @@ function AddProduct() {
         withCredentials: true,
       });
 
-      console.log(response.data); // Handle response as needed
+      // console.log(response.data); // Handle response as needed
 
       alert(response.data.message); // Display success message
 

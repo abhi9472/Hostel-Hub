@@ -45,7 +45,7 @@ function Home() {
         throw new Error("Failed to fetch products");
       }
       const responseData = await response.json();
-      console.log(responseData);
+      // console.log(responseData);
       const productData = responseData.data || [];
       setProducts(productData);
       setLoading(false);
