@@ -10,8 +10,16 @@ function AddProduct() {
   const [coverImg, setCoverImg] = useState(null);
   const [isAnonymous, setIsAnonymous] = useState(null);
   const [productImgs, setProductImgs] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(true); 
-  const [error, setError] = useState("");// Default to true, assuming user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [error, setError] = useState(""); // Default to true, assuming user is logged in
+  const maxLength = 300;
+
+  const handleDescriptionChange = (e) => {
+    const inputValue = e.target.value;
+    if (inputValue.length <= maxLength) {
+      setDescription(inputValue);
+    }
+  };
 
   useEffect(() => {
     // Check if user is logged in
@@ -28,7 +36,8 @@ function AddProduct() {
       const priceValue = parseFloat(value);
       if (priceValue < 0) {
         setError("Price cannot be negative.");
-      } else if (priceValue > 200000) { // Example maximum price of 1000
+      } else if (priceValue > 200000) {
+        // Example maximum price of 1000
         setError("Maximum price is 200000.");
       } else {
         setError("");
@@ -54,7 +63,9 @@ function AddProduct() {
       }
       for (const image of productImgs) {
         if (!isValidImageType(image.type)) {
-          alert("Please select valid product images of type JPG, JPEG, or PNG.");
+          alert(
+            "Please select valid product images of type JPG, JPEG, or PNG.",
+          );
           setIsSubmitting(false);
           return;
         }
@@ -101,12 +112,9 @@ function AddProduct() {
   };
   const isValidImageType = (type) => {
     return (
-      type === "image/jpeg" ||
-      type === "image/jpg" ||
-      type === "image/png"
+      type === "image/jpeg" || type === "image/jpg" || type === "image/png"
     );
   };
-  
 
   const handleCoverImageChange = (e) => {
     setCoverImg(e.target.files[0]);
@@ -124,7 +132,7 @@ function AddProduct() {
   }
 
   return (
-    <div className="container mx-auto p-3">
+    <div className="container mx-auto mt-20 p-3">
       <div className="container mx-auto flex items-center justify-center p-3">
         <h2 className="mb-6 text-3xl font-semibold">ADD PRODUCT</h2>
       </div>
@@ -140,22 +148,25 @@ function AddProduct() {
         <textarea
           className="form-textarea mb-4 w-full border"
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          rows={5} // Adjust the number of rows as needed
+          onChange={handleDescriptionChange}
+          rows={5}
+          maxLength={maxLength}
         />
-        
+        <p className="text-sm text-gray-500">
+          {description.length}/{maxLength} characters
+        </p>
+
         <label className="mb-2 block">Product Price</label>
         {/* <label htmlFor="price">Price:</label> */}
-          <input
-            className="form-input mb-4 w-full border"
-
-            type="number"
-            id="price"
-            value={price}
-            onChange={handlePriceChange}
-            required
-          />
-          {error && <p style={{ color: "red" }}>{error}</p>}
+        <input
+          className="form-input mb-4 w-full border"
+          type="number"
+          id="price"
+          value={price}
+          onChange={handlePriceChange}
+          required
+        />
+        {error && <p style={{ color: "red" }}>{error}</p>}
 
         <label className="mb-2 block">Product Cover Image</label>
         <input

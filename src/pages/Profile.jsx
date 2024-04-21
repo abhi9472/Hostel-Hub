@@ -288,7 +288,7 @@ function Profile() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
+    <div className="container mb-10 mt-20 mx-auto flex-col items-center justify-between gap-16 px-4 py-18">
       {/* User information section */}
       <div className="relative flex items-center rounded-lg border bg-white p-6 shadow-lg">
         {/* User avatar */}

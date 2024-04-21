@@ -64,7 +64,7 @@ function Login() {
 
   return (
     <div
-      className="flex min-h-screen items-center justify-center"
+      className="mg-15  h-15 mt-12 flex min-h-screen items-center justify-center"
       style={{
         backgroundImage: `url('https://res.cloudinary.com/don5euayf/image/upload/f_auto,q_auto/zdxhlbkdsxn0umeptvzh')`,
         backgroundSize: "cover",

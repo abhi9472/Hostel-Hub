@@ -72,8 +72,8 @@ function SignUp() {
   };
 
   return (
-    <div className="mx-auto mt-8 max-w-lg rounded bg-white p-6 shadow-md">
-      <h2 className="mb-4 text-2xl">Signup</h2>
+    <div className="container mx-auto mt-20 max-w-lg rounded bg-white p-6 shadow-md">
+    <h2 className="mb-8 text-2xl text-center" >Signup</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
           <label className="mb-1 block font-medium text-gray-700">

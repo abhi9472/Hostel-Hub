@@ -62,7 +62,7 @@ function ProductDetailsComponent({
 
   return (
     <div
-      className={`container mx-auto flex-col items-center justify-between gap-16 px-4 py-8 ${isImageModalOpen ? "overflow-hidden" : ""}`}
+    className={`container mb-10 mt-20 mx-auto flex-col items-center justify-between gap-16 px-4 py-18 ${isImageModalOpen ? "overflow-hidden" : ""}`}
     >
       <div className="flex-grow">
         {/* <h2 className="text-3xl font-semibold mb-4">Product Images</h2> */}
