@@ -50,9 +50,9 @@ function SignUp() {
 
       // console.log(formData);
       // console.log(response);
-      if (response.status !== 200) {
-        throw new Error("Failed to sign up");
-      }
+      // if (response.status !== 200) {
+      //   throw new Error("Failed to sign up");
+      // }
 
       // Handle successful signup, e.g., show success message or redirect
 
@@ -64,7 +64,16 @@ function SignUp() {
 
       //window.location.href = '/login'
     } catch (error) {
-      console.error("Error signing up:", error.message);
+      // alert("UID Already Being Used");
+
+      console.error("Error signing up:", error.response.data);
+
+      if(error.response.data.message === "Username / Email Alredy being used"){
+        alert("UID Already Being Used");
+      }else{
+        alert("Error")
+      }
+
       // Handle signup error, e.g., display error message to the user
     } finally {
       setIsSubmitting(false); // Reset the form submission state

@@ -298,8 +298,8 @@ function Profile() {
         {/* User details */}
         <div>
           <p className="text-2xl font-bold">{userData.name}</p>
-          <p className="text-gray-600">{userData.email}</p>
-          <p className="text-gray-600">Username: {userData.username}</p>
+          <p className="text-gray-600">Email:{userData.email}</p>
+          <p className="text-gray-600">Uid: {userData.username}</p>
           <p className="text-gray-600">Phone: {userData.phoneNum}</p>
           <p className="text-gray-600">Hostel: {userData.hostel_name}</p>
         </div>
