@@ -140,7 +140,7 @@ function ProductDetailsComponent({
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        Chat :{" "}
+                        {/* Chat :{" "} */}
                         <img
                           src="/ww.png"
                           alt="WhatsApp"
