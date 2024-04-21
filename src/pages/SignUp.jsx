@@ -72,145 +72,167 @@ function SignUp() {
   };
 
   return (
-    <div className="container mx-auto mt-20 max-w-lg rounded bg-white p-6 shadow-md">
-    <h2 className="mb-8 text-2xl text-center" >Signup</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <div>
-          <label className="mb-1 block font-medium text-gray-700">
-            Username:
-          </label>
-          <input
-            type="text"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            minLength={5}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-          />
+    <div
+      className="mg-15 h-15 mt-6 flex min-h-screen items-center justify-center"
+      style={{
+        backgroundImage: `url('/ss.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        width: "100%", // Set the minimum height to cover the entire viewport
+      }}
+    >
+      <div className="mt-16 flex h-screen flex-col items-center justify-start">
+        <div className="mb-4 text-center text-2xl font-semibold text-black">
+          Sign Up
         </div>
-        <div>
-          <label className="mb-1 block font-medium text-gray-700">Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-            minLength={1}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label className="mb-1 block font-medium text-gray-700">UID:</label>
-          <input
-            type="text"
-            name="uid"
-            value={formData.uid}
-            onChange={handleChange}
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label className="mb-1 block font-medium text-gray-700">
-            Gender:
-          </label>
-          <select
-            name="gender"
-            value={formData.gender}
-            onChange={handleChange}
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-          >
-            <option value="">Select Gender</option>
-            <option value="MALE">MALE</option>
-            <option value="FEMALE">FEMALE</option>
-            <option value="OTHER">OTHER</option>
-          </select>
-        </div>
-        <div>
-          <label className="mb-1 block font-medium text-gray-700">
-            Email-CU_Official:
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            pattern="[a-zA-Z0-9._%+-]+@(cuchd\.in|cumail\.in)$"
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label className="mb-1 block font-medium text-gray-700">
-            Password-Len(8):
-          </label>
-          <input
-            type="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            minLength={8}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label className="mb-1 block font-medium text-gray-700">
-            Phone Number:
-          </label>
-          <input
-            type="tel"
-            name="phoneNum"
-            value={formData.phoneNum}
-            onChange={handleChange}
-            required
-            minLength={10}
-            maxLength={10}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-          />
-        </div>
-        <div>
-          <label className="mb-1 block font-medium text-gray-700">
-            Hostel:
-          </label>
-          <select
-            name="hostel_name"
-            value={formData.hostel_name}
-            onChange={handleChange}
-            required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-          >
-            <option value="">Select Hostel</option>
-            <option value="NekChand/Zakir">NekChand/Zakir</option>
-            <option value="SUKHNA">SUKHNA</option>
-            <option value="TAGORE">TAGORE</option>
-          </select>
-        </div>
-        <div>
-          <label className="mb-1 block font-medium text-gray-700">
-            Profile Picture || Optional:
-          </label>
-          <input
-            type="file"
-            name="avatar"
-            accept="image/*"
-            onChange={handleProfilePicChange}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
-          />
-        </div>
-        <button
-          type="submit"
-          className="w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
-          // disabled={isLoading}
-          disabled={isSubmitting}
+        <div
+          className="bg-offwhite w-full max-w-xs p-8 shadow-md"
+          style={{ backdropFilter: "blur(10px)" }}
         >
-          {/* {isLoading ? 'Loading...' : ''} */}
-          {isSubmitting ? "Loading..." : "Sign Up"}
-        </button>
-      </form>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="mb-1 block font-medium text-gray-700">
+                Username:
+              </label>
+              <input
+                type="text"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+                required
+                minLength={5}
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block font-medium text-gray-700">
+                Name:
+              </label>
+              <input
+                type="text"
+                name="name"
+                value={formData.name}
+                onChange={handleChange}
+                required
+                minLength={1}
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block font-medium text-gray-700">
+                UID:
+              </label>
+              <input
+                type="text"
+                name="uid"
+                value={formData.uid}
+                onChange={handleChange}
+                required
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block font-medium text-gray-700">
+                Gender:
+              </label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                required
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+              >
+                <option value="">Select Gender</option>
+                <option value="MALE">MALE</option>
+                <option value="FEMALE">FEMALE</option>
+                <option value="OTHER">OTHER</option>
+              </select>
+            </div>
+            <div>
+              <label className="mb-1 block font-medium text-gray-700">
+                Email-CU_Official:
+              </label>
+              <input
+                type="email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+                pattern="[a-zA-Z0-9._%+-]+@(cuchd\.in|cumail\.in)$"
+                required
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block font-medium text-gray-700">
+                Password-Len(8):
+              </label>
+              <input
+                type="password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                minLength={8}
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block font-medium text-gray-700">
+                Phone Number:
+              </label>
+              <input
+                type="tel"
+                name="phoneNum"
+                value={formData.phoneNum}
+                onChange={handleChange}
+                required
+                minLength={10}
+                maxLength={10}
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+              />
+            </div>
+            <div>
+              <label className="mb-1 block font-medium text-gray-700">
+                Hostel:
+              </label>
+              <select
+                name="hostel_name"
+                value={formData.hostel_name}
+                onChange={handleChange}
+                required
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+              >
+                <option value="">Select Hostel</option>
+                <option value="NekChand/Zakir">NekChand/Zakir</option>
+                <option value="SUKHNA">SUKHNA</option>
+                <option value="TAGORE">TAGORE</option>
+              </select>
+            </div>
+            <div>
+              <label className="mb-1 block font-medium text-gray-700">
+                Profile Picture || Optional:
+              </label>
+              <input
+                type="file"
+                name="avatar"
+                accept="image/*"
+                onChange={handleProfilePicChange}
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
+              // disabled={isLoading}
+              disabled={isSubmitting}
+            >
+              {/* {isLoading ? 'Loading...' : ''} */}
+              {isSubmitting ? "Loading..." : "Sign Up"}
+            </button>
+          </form>
+        </div>
+      </div>
     </div>
   );
 }
