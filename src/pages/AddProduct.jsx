@@ -132,81 +132,101 @@ function AddProduct() {
   }
 
   return (
-    <div className="container mx-auto mt-20 p-3">
-      <div className="container mx-auto flex items-center justify-center p-3">
-        <h2 className="mb-6 text-3xl font-semibold">ADD PRODUCT</h2>
-      </div>
-      <div className="mx-auto max-w-md overflow-hidden rounded-lg border border-white bg-white p-6 shadow-md">
-        <label className="mb-2 block">Product Name</label>
-        <input
-          className="form-input mb-4 w-full border"
-          type="text"
-          value={productName}
-          onChange={(e) => setProductName(e.target.value)}
-        />
-        <label className="mb-2 block">Product Description</label>
-        <textarea
-          className="form-textarea mb-4 w-full border"
-          value={description}
-          onChange={handleDescriptionChange}
-          rows={5}
-          maxLength={maxLength}
-        />
-        <p className="text-sm text-gray-500">
-          {description.length}/{maxLength} characters
-        </p>
+    <div
+      className="mg-15 h-15 mt-6 flex min-h-screen items-center justify-center"
+      style={{
+        backgroundImage: `url('/aaa.jpg')`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        minHeight: "100vh",
+        width: "100%", // Set the minimum height to cover the entire viewport
+      }}
+    >
+      <div className="mt-16 flex h-screen flex-col items-center justify-start">
+        <div className="mb-4 text-center text-2xl font-semibold text-black">
+          Add Product
+        </div>
+        <div
+          className="bg-offwhite w-full max-w-xs p-8 shadow-md"
+          style={{ backdropFilter: "blur(10px)" }}
+        >
+          <label className="mb-2 block  font-semibold text-black">
+            Product Name
+          </label>
+          <input
+            className="form-input mb-4 w-full border"
+            type="text"
+            value={productName}
+            onChange={(e) => setProductName(e.target.value)}
+          />
+          <label className="mb-2 block  font-semibold text-black">Product Description</label>
+          <textarea
+            className="form-textarea mb-4 w-full border"
+            value={description}
+            onChange={handleDescriptionChange}
+            rows={5}
+            maxLength={maxLength}
+          />
+          <p className="text-sm text-gray-500">
+            {description.length}/{maxLength} characters
+          </p>
 
-        <label className="mb-2 block">Product Price</label>
-        {/* <label htmlFor="price">Price:</label> */}
-        <input
-          className="form-input mb-4 w-full border"
-          type="number"
-          id="price"
-          value={price}
-          onChange={handlePriceChange}
-          required
-        />
-        {error && <p style={{ color: "red" }}>{error}</p>}
+          <label className="mb-2 block  font-semibold text-black">Product Price</label>
+          {/* <label htmlFor="price">Price:</label> */}
+          <input
+            className="form-input mb-4 w-full border"
+            type="number"
+            id="price"
+            value={price}
+            onChange={handlePriceChange}
+            required
+          />
+          {error && <p style={{ color: "red" }}>{error}</p>}
 
-        <label className="mb-2 block">Product Cover Image</label>
-        <input
-          className="form-input mb-4 w-full border"
-          type="file"
-          onChange={handleCoverImageChange}
-        />
-        <label className="mb-2 block">Product Images</label>
-        <input
-          className="form-input mb-4 w-full border"
-          type="file"
-          onChange={handleProductImageChange}
-          multiple
-        />
-        <label className="mb-2 block">Is the product anonymous?</label>
+          <label className="mb-2 block  font-semibold text-black">Product Cover Image</label>
+          <input
+            className="form-input mb-4 w-full border"
+            type="file"
+            onChange={handleCoverImageChange}
+          />
+          <label className="mb-2 block  font-semibold text-black">Product Images</label>
+          <input
+            className="form-input mb-4 w-full border"
+            type="file"
+            onChange={handleProductImageChange}
+            multiple
+          />
+          <label className="mb-2 block  font-semibold text-black">
+            Do you want to show your contact details public?
+          </label>
 
-        <div className="mb-4 flex items-center space-x-4">
+          <div className="mb-4 flex items-center space-x-4">
+            <button
+              className={`rounded bg-gray-300 px-4 py-2 hover:bg-gray-400 ${isAnonymous === 1 ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
+              onClick={() => setIsAnonymous(1)}
+            >
+              Yes
+            </button>
+            <button
+              className={`rounded bg-gray-300 px-4 py-2 hover:bg-gray-400 ${isAnonymous === 0 ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
+              onClick={() => setIsAnonymous(0)}
+            >
+              No
+            </button>
+          </div>
+          {isSubmitting && isAnonymous === null && (
+            <p className="text-red-500">
+              Please select an option for anonymity.
+            </p>
+          )}
           <button
-            className={`rounded bg-gray-300 px-4 py-2 hover:bg-gray-400 ${isAnonymous === 1 ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
-            onClick={() => setIsAnonymous(1)}
+            onClick={handleApi}
+            className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
+            disabled={isSubmitting}
           >
-            Yes
-          </button>
-          <button
-            className={`rounded bg-gray-300 px-4 py-2 hover:bg-gray-400 ${isAnonymous === 0 ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
-            onClick={() => setIsAnonymous(0)}
-          >
-            No
+            {isSubmitting ? "Submitting..." : "SUBMIT"}
           </button>
         </div>
-        {isSubmitting && isAnonymous === null && (
-          <p className="text-red-500">Please select an option for anonymity.</p>
-        )}
-        <button
-          onClick={handleApi}
-          className="rounded bg-blue-500 px-4 py-2 font-bold text-white hover:bg-blue-600"
-          disabled={isSubmitting}
-        >
-          {isSubmitting ? "Submitting..." : "SUBMIT"}
-        </button>
       </div>
     </div>
   );
