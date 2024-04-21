@@ -197,7 +197,7 @@ function withHistory(Component) {
         }
         const responseData = await response.json();
         const productData = responseData.data || null;
-        console.log(responseData);
+        // console.log(responseData);
         const fetchedProductId = productData._id;
 
         // Save product ID to local storage
