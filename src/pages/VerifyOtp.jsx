@@ -72,11 +72,9 @@ function VerifyOTP() {
 
       // Send request to resend OTP
       const response = await axios.post(
-        "https://hostelhub-backend.onrender.com/api/v1/users/requestOTP?id=${user}",
-        // {
-        //   id: user,
-        // }
+        `https://hostelhub-backend.onrender.com/api/v1/users/requestOTP?id=${user}`
       );
+      
 
       // Handle the response as needed
       console.log(response.data);

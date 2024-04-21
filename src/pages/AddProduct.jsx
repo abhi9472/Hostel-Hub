@@ -143,9 +143,12 @@ function AddProduct() {
           onChange={(e) => setDescription(e.target.value)}
           rows={5} // Adjust the number of rows as needed
         />
+        
         <label className="mb-2 block">Product Price</label>
         {/* <label htmlFor="price">Price:</label> */}
           <input
+            className="form-input mb-4 w-full border"
+
             type="number"
             id="price"
             value={price}

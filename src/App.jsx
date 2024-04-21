@@ -1,5 +1,7 @@
 import "./App.css";
 import { NavBar } from "./components/Navbar";
+// import { Footer } from "./components/Footer";
+
 import { Outlet } from "react-router-dom";
 import React, { useState } from "react";
 import "./index.css";
@@ -11,6 +13,7 @@ function App() {
   return (
     <>
       <NavBar isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+      {/* <Footer/> */}
       <Outlet />
     </>
   );
