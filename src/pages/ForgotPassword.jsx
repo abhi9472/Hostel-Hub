@@ -50,7 +50,7 @@ function ForgotPassword() {
               className="mb-2 block text-sm font-bold text-gray-700"
               htmlFor="email"
             >
-              Email
+              Email - Official
             </label>
             <input
               className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"

@@ -80,7 +80,7 @@ function Login() {
               className="mb-2 block text-sm font-bold text-gray-700"
               htmlFor="username"
             >
-              Username || Email
+              Email-Official || UID 
             </label>
             <input
               className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"

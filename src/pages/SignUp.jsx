@@ -5,11 +5,11 @@ function SignUp() {
   // const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    username: "",
+    // username: "",
     name: "",
     uid: "",
     gender: "",
-    email: "",
+    // email: "",
     phoneNum: "",
     hostel_name: "",
     password: "",
@@ -32,11 +32,11 @@ function SignUp() {
       setIsSubmitting(true);
       // setIsLoading(true);
       const formDataToSend = new FormData();
-      formDataToSend.append("username", formData.username);
+      // formDataToSend.append("username", formData.username);
       formDataToSend.append("name", formData.name);
       formDataToSend.append("uid", formData.uid);
       formDataToSend.append("gender", formData.gender);
-      formDataToSend.append("email", formData.email);
+      // formDataToSend.append("email", formData.email);
       formDataToSend.append("password", formData.password);
       formDataToSend.append("phoneNum", formData.phoneNum);
       formDataToSend.append("hostel_name", formData.hostel_name);
@@ -91,7 +91,7 @@ function SignUp() {
           style={{ backdropFilter: "blur(10px)" }}
         >
           <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
+            {/* <div>
               <label className="mb-1 block font-medium text-gray-700">
                 Username:
               </label>
@@ -104,7 +104,7 @@ function SignUp() {
                 minLength={5}
                 className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
               />
-            </div>
+            </div> */}
             <div>
               <label className="mb-1 block font-medium text-gray-700">
                 Name:
@@ -149,7 +149,7 @@ function SignUp() {
                 <option value="OTHER">OTHER</option>
               </select>
             </div>
-            <div>
+            {/* <div>
               <label className="mb-1 block font-medium text-gray-700">
                 Email-CU_Official:
               </label>
@@ -162,7 +162,7 @@ function SignUp() {
                 required
                 className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
               />
-            </div>
+            </div> */}
             <div>
               <label className="mb-1 block font-medium text-gray-700">
                 Password-Len(8):

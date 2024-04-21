@@ -56,7 +56,7 @@ function VerifyForgotOtp() {
 
   return (
 <div className="mx-auto mt-24 max-w-md rounded bg-white p-6 shadow-md">
-      <h2 className="mb-4 text-2xl">Enter OTP</h2>
+      <h2 className="mb-4 text-2xl">Enter OTP - Recieved On OutLook</h2>
       <form onSubmit={handleVerifyOTP} className="space-y-4">
         <div>
           <label className="mb-1 block font-medium text-gray-700">OTP:</label>
@@ -76,6 +76,8 @@ function VerifyForgotOtp() {
           Verify OTP
         </button>
       </form>
+      <h2 className="mb-2 text-xl bg text-red-600">Check Spam-* If Spam Mark as not spam</h2>
+
     </div>
   );
 }
