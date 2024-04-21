@@ -10,7 +10,7 @@ function ProductDetailsComponent({
   handleBackButtonClick,
   isLoggedIn,
 }) {
-  const waLink = `https://wa.me/${product.phoneNum}`;
+  const waLink = `https://wa.me/+91${product.phoneNum}`;
   let pid;
   const [isImageModalOpen, setIsImageModalOpen] = useState(false);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
