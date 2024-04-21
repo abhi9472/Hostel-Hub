@@ -93,7 +93,7 @@ function VerifyOTP() {
   };
 
   return (
-    <div className="mx-auto mt-8 max-w-md rounded bg-white p-6 shadow-md">
+<div className="mx-auto mt-24 max-w-md rounded bg-white p-6 shadow-md">
       <h2 className="mb-4 text-2xl">Enter OTP</h2>
       <form onSubmit={handleVerifyOTP} className="space-y-4">
         <div>
