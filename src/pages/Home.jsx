@@ -91,9 +91,11 @@ function Home() {
   };
 
   return (
-    <div className="py-18 container mx-auto px-4">
-      <div className="mb-8">
-        <h2 className="mb-6 text-3xl font-semibold">Featured Products</h2>
+    <div className="py-18 container mx-auto mt-28 px-6">
+      <div className="mb-13">
+        <h2 className="mb-12 mt-16 text-3xl font-semibold">
+          Featured Products
+        </h2>
         <div className="overflow-hidden">
           <Carousel {...settings}>
             {!loading &&

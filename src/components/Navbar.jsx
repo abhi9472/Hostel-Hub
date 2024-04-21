@@ -66,7 +66,7 @@ export function NavBar(props) {
   const user = JSON.parse(localStorage.getItem("user"));
 
   return (
-    <header className="shadow-3xl bg-gray-200 p-4">
+    <header className="shadow-3xl bg-gray-200 p-4 fixed w-full top-0 z-50">
       <div className="container mx-auto flex items-center justify-between">
         <a href="/" className="text-2xl font-bold">
           <img src="/logo9.png" alt="Your Logo" className="w-25 h-10" />
@@ -161,5 +161,6 @@ export function NavBar(props) {
     </header>
   );
 }
+
 
 export default NavBar;
