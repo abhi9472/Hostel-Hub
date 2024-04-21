@@ -1,17 +1,30 @@
-// React component VerifyOTP.jsx
-
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 function VerifyOTP() {
-  // const [isLoading, setIsLoading] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
   const [otp, setOTP] = useState("");
   const [error, setError] = useState("");
+  const [timer, setTimer] = useState(30);
+  const [isResendDisabled, setIsResendDisabled] = useState(false);
+
+  useEffect(() => {
+    let interval;
+
+    if (timer > 0) {
+      interval = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+
+      setIsResendDisabled(true); // Disable Resend OTP button during countdown
+    } else {
+      setIsResendDisabled(false); // Enable Resend OTP button after countdown finishes
+    }
+
+    return () => clearInterval(interval); // Cleanup the interval on component unmount
+  }, [timer]);
 
   const handleOTPChange = (e) => {
-    // Ensure that only numbers are entered for OTP
     const inputOTP = e.target.value.replace(/\D/, "");
     setOTP(inputOTP);
   };
@@ -21,14 +34,11 @@ function VerifyOTP() {
     try {
       setIsSubmitting(true);
 
-      // setIsLoading(true);
-      // Fetch user from localStorage
       const user = localStorage.getItem("User");
       if (!user) {
         throw new Error("User not found in localStorage");
       }
 
-      // Send OTP verification request
       const response = await axios.post(
         "https://hostelhub-backend.onrender.com/api/v1/users/verifyOTP",
         {
@@ -36,29 +46,51 @@ function VerifyOTP() {
           OTP: otp,
         },
       );
-      //   setIsLoading(false);
-      //let f = 0;
-      console.log(response.data); // Log the response data for debugging
-      //console.error('Error verifying OTP:', error.response); // Log full error response
 
+      console.log(response.data);
       console.log("OTP verified successfully");
-      //   f = 1;
-      //   if(f==1){
-      //localStorage.removeItem('user');
-      //   }
-
-      // Redirect to home page upon successful verification
       localStorage.removeItem("user");
-      window.location.href = "/login"; // Redirect to the home page
-
-      //window.location.href = '/'; // Redirect to the home page
+      window.location.href = "/login";
     } catch (error) {
       console.error("Error verifying OTP:", error.message);
-      console.error("Error verifying OTP:", error.response); // Log full error response
+      console.error("Error verifying OTP:", error.response);
 
-      setError("OTP verification failed"); // Set error message
+      setError("OTP verification failed");
     } finally {
-      setIsSubmitting(false); // Reset the form submission state
+      setIsSubmitting(false);
+    }
+  };
+
+  const handleResendOTP = async () => {
+    try {
+      setIsSubmitting(true); // Set submitting state to true while sending request
+
+      const user = localStorage.getItem("User");
+      if (!user) {
+        throw new Error("User not found in localStorage");
+      }
+
+      // Send request to resend OTP
+      const response = await axios.post(
+        "https://hostelhub-backend.onrender.com/api/v1/users/requestOTP?id=${user}",
+        // {
+        //   id: user,
+        // }
+      );
+
+      // Handle the response as needed
+      console.log(response.data);
+      alert("OTP has been resent successfully!"); // For demonstration
+
+      // Disable Resend OTP button and start timer countdown
+      setIsResendDisabled(true);
+      setTimer(30);
+    } catch (error) {
+      console.error("Error resending OTP:", error.message);
+      // Handle error if resend OTP request fails
+      alert("Failed to resend OTP. Please try again."); // For demonstration
+    } finally {
+      setIsSubmitting(false); // Reset submitting state
     }
   };
 
@@ -82,11 +114,18 @@ function VerifyOTP() {
           className="w-full rounded-md bg-blue-500 px-4 py-2 text-white hover:bg-blue-600 focus:bg-blue-600 focus:outline-none"
           disabled={isSubmitting}
         >
-          {/* Verify OTP */}
-
-          {isSubmitting ? "Loading.." : "Verify Otp"}
+          {isSubmitting ? "Loading.." : "Verify OTP"}
         </button>
       </form>
+      <div className="mt-4">
+        <button
+          onClick={handleResendOTP}
+          className="w-full rounded-md bg-gray-300 px-4 py-2 text-gray-700 hover:bg-gray-400 focus:bg-gray-400 focus:outline-none"
+          disabled={isResendDisabled}
+        >
+          Resend OTP {isResendDisabled && `(${timer}s)`}
+        </button>
+      </div>
     </div>
   );
 }

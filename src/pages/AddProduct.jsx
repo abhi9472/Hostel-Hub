@@ -10,7 +10,8 @@ function AddProduct() {
   const [coverImg, setCoverImg] = useState(null);
   const [isAnonymous, setIsAnonymous] = useState(null);
   const [productImgs, setProductImgs] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(true); // Default to true, assuming user is logged in
+  const [isLoggedIn, setIsLoggedIn] = useState(true); 
+  const [error, setError] = useState("");// Default to true, assuming user is logged in
 
   useEffect(() => {
     // Check if user is logged in
@@ -19,6 +20,24 @@ function AddProduct() {
       setIsLoggedIn(false);
     }
   }, []);
+  const handlePriceChange = (e) => {
+    const value = e.target.value;
+    // Check if the value is a valid number
+    if (!isNaN(value)) {
+      // Check for minimum and maximum price
+      const priceValue = parseFloat(value);
+      if (priceValue < 0) {
+        setError("Price cannot be negative.");
+      } else if (priceValue > 200000) { // Example maximum price of 1000
+        setError("Maximum price is 200000.");
+      } else {
+        setError("");
+        setPrice(value);
+      }
+    } else {
+      setError("Please enter a valid price.");
+    }
+  };
 
   const handleApi = async () => {
     try {
@@ -27,6 +46,18 @@ function AddProduct() {
         alert("Please select an option for anonymity.");
         setIsSubmitting(false); // Display error message if no selection is made
         return;
+      }
+      if (!coverImg || !isValidImageType(coverImg.type)) {
+        alert("Please select a valid cover image of type JPG, JPEG, or PNG.");
+        setIsSubmitting(false);
+        return;
+      }
+      for (const image of productImgs) {
+        if (!isValidImageType(image.type)) {
+          alert("Please select valid product images of type JPG, JPEG, or PNG.");
+          setIsSubmitting(false);
+          return;
+        }
       }
 
       const formData = new FormData();
@@ -68,6 +99,14 @@ function AddProduct() {
       setIsSubmitting(false); // Reset the form submission state
     }
   };
+  const isValidImageType = (type) => {
+    return (
+      type === "image/jpeg" ||
+      type === "image/jpg" ||
+      type === "image/png"
+    );
+  };
+  
 
   const handleCoverImageChange = (e) => {
     setCoverImg(e.target.files[0]);
@@ -105,12 +144,16 @@ function AddProduct() {
           rows={5} // Adjust the number of rows as needed
         />
         <label className="mb-2 block">Product Price</label>
-        <input
-          className="form-input mb-4 w-full border"
-          type="Number"
-          value={price}
-          onChange={(e) => setPrice(e.target.value)}
-        />
+        {/* <label htmlFor="price">Price:</label> */}
+          <input
+            type="number"
+            id="price"
+            value={price}
+            onChange={handlePriceChange}
+            required
+          />
+          {error && <p style={{ color: "red" }}>{error}</p>}
+
         <label className="mb-2 block">Product Cover Image</label>
         <input
           className="form-input mb-4 w-full border"
