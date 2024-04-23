@@ -68,10 +68,12 @@ function SignUp() {
 
       console.error("Error signing up:", error.response.data);
 
-      if(error.response.data.message === "Username / Email Alredy being used"){
+      if (
+        error.response.data.message === "Username / Email Alredy being used"
+      ) {
         alert("UID Already Being Used");
-      }else{
-        alert("Error")
+      } else {
+        alert("Error");
       }
 
       // Handle signup error, e.g., display error message to the user
@@ -92,7 +94,7 @@ function SignUp() {
       }}
     >
       <div className="mt-16 flex h-screen flex-col items-center justify-start">
-        <div className="mb-4 text-center text-2xl font-semibold text-black">
+        <div className="mb-4 mt-6 text-center text-2xl font-semibold text-black">
           Sign Up
         </div>
         <div
@@ -115,8 +117,10 @@ function SignUp() {
               />
             </div> */}
             <div>
-              <label className="mb-1 block font-medium text-gray-700">
+              <label className="mb-1 block  font-medium text-black-700">
                 Name:
+                <span className="text-red-500 ml-1">*</span>
+
               </label>
               <input
                 type="text"
@@ -125,12 +129,14 @@ function SignUp() {
                 onChange={handleChange}
                 required
                 minLength={1}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-orange-500"
               />
             </div>
             <div>
-              <label className="mb-1 block font-medium text-gray-700">
+              <label className="mb-1 block font-medium text-black-700">
                 UID:
+                <span className="text-red-500 ml-1">*</span>
+
               </label>
               <input
                 type="text"
@@ -138,19 +144,21 @@ function SignUp() {
                 value={formData.uid}
                 onChange={handleChange}
                 required
-                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-orange-500"
               />
             </div>
             <div>
-              <label className="mb-1 block font-medium text-gray-700">
+              <label className="mb-1 block font-medium text-black-700">
                 Gender:
+                <span className="text-red-500 ml-1">*</span>
+
               </label>
               <select
                 name="gender"
                 value={formData.gender}
                 onChange={handleChange}
                 required
-                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-orange-500"
               >
                 <option value="">Select Gender</option>
                 <option value="MALE">MALE</option>
@@ -173,8 +181,10 @@ function SignUp() {
               />
             </div> */}
             <div>
-              <label className="mb-1 block font-medium text-gray-700">
+              <label className="mb-1 block font-medium text-black-700">
                 Password-Len(8):
+                <span className="text-red-500 ml-1">*</span>
+
               </label>
               <input
                 type="password"
@@ -183,12 +193,14 @@ function SignUp() {
                 onChange={handleChange}
                 required
                 minLength={8}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-orange-500"
               />
             </div>
             <div>
-              <label className="mb-1 block font-medium text-gray-700">
+              <label className="mb-1 block font-medium text-black-700">
                 Phone Number:
+                <span className="text-red-500 ml-1">*</span>
+
               </label>
               <input
                 type="tel"
@@ -198,19 +210,21 @@ function SignUp() {
                 required
                 minLength={10}
                 maxLength={10}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-orange-500"
               />
             </div>
             <div>
-              <label className="mb-1 block font-medium text-gray-700">
+              <label className="mb-1 block font-medium text-black-700">
                 Hostel:
+                <span className="text-red-500 ml-1">*</span>
+
               </label>
               <select
                 name="hostel_name"
                 value={formData.hostel_name}
                 onChange={handleChange}
                 required
-                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-orange-500"
               >
                 <option value="">Select Hostel</option>
                 <option value="NekChand/Zakir">NekChand/Zakir</option>
@@ -219,7 +233,7 @@ function SignUp() {
               </select>
             </div>
             <div>
-              <label className="mb-1 block font-medium text-gray-700">
+              <label className="mb-1 block font-medium text-black-700">
                 Profile Picture || Optional:
               </label>
               <input
@@ -227,7 +241,7 @@ function SignUp() {
                 name="avatar"
                 accept="image/*"
                 onChange={handleProfilePicChange}
-                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+                className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-orange-500"
               />
             </div>
             <button

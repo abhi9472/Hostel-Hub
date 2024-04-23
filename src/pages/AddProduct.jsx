@@ -7,7 +7,7 @@ function AddProduct() {
   const [productName, setProductName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
-  const [coverImg, setCoverImg] = useState(null);
+  // const [coverImg, setCoverImg] = useState(null);
   const [isAnonymous, setIsAnonymous] = useState(null);
   const [productImgs, setProductImgs] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -56,11 +56,11 @@ function AddProduct() {
         setIsSubmitting(false); // Display error message if no selection is made
         return;
       }
-      if (!coverImg || !isValidImageType(coverImg.type)) {
-        alert("Please select a valid cover image of type JPG, JPEG, or PNG.");
-        setIsSubmitting(false);
-        return;
-      }
+      // if (!coverImg || !isValidImageType(coverImg.type)) {
+      //   alert("Please select a valid cover image of type JPG, JPEG, or PNG.");
+      //   setIsSubmitting(false);
+      //   return;
+      // }
       for (const image of productImgs) {
         if (!isValidImageType(image.type)) {
           alert(
@@ -75,7 +75,7 @@ function AddProduct() {
       formData.append("productName", productName);
       formData.append("description", description);
       formData.append("price", price);
-      formData.append("coverImg", coverImg);
+      // formData.append("coverImg", coverImg);
       productImgs.forEach((image) => {
         formData.append("productImg", image);
       });
@@ -98,7 +98,7 @@ function AddProduct() {
       setProductName("");
       setDescription("");
       setPrice("");
-      setCoverImg(null);
+      // setCoverImg(null);
       setProductImgs([]);
       setIsAnonymous(null);
       setIsSubmitting(false);
@@ -116,9 +116,9 @@ function AddProduct() {
     );
   };
 
-  const handleCoverImageChange = (e) => {
-    setCoverImg(e.target.files[0]);
-  };
+  // const handleCoverImageChange = (e) => {
+  //   setCoverImg(e.target.files[0]);
+  // };
 
   const handleProductImageChange = (e) => {
     const files = e.target.files;
@@ -152,26 +152,39 @@ function AddProduct() {
         >
           <label className="mb-2 block  font-semibold text-black">
             Product Name
+            <span className="text-red-500 ml-1">*</span>
           </label>
           <input
             className="form-input mb-4 w-full border"
             type="text"
             value={productName}
             onChange={(e) => setProductName(e.target.value)}
+            required
           />
-          <label className="mb-2 block  font-semibold text-black">Product Description</label>
+          <label className="mb-2 block  font-semibold text-black">
+            Product Description
+            <span className="text-red-500 ml-1">*</span>
+          </label>
+          {/* <span class="text-red-500 ml-1">*</span> */}
+
           <textarea
             className="form-textarea mb-4 w-full border"
             value={description}
             onChange={handleDescriptionChange}
             rows={5}
             maxLength={maxLength}
+            required
           />
           <p className="text-sm text-gray-500">
             {description.length}/{maxLength} characters
           </p>
 
-          <label className="mb-2 block  font-semibold text-black">Product Price</label>
+          <label className="mb-2 block  font-semibold text-black">
+            Product Price
+            <span className="text-red-500 ml-1">*</span>
+          </label>
+          {/* <span class="text-red-500 ml-1">*</span> */}
+
           {/* <label htmlFor="price">Price:</label> */}
           <input
             className="form-input mb-4 w-full border"
@@ -183,21 +196,28 @@ function AddProduct() {
           />
           {error && <p style={{ color: "red" }}>{error}</p>}
 
-          <label className="mb-2 block  font-semibold text-black">Product Cover Image</label>
+          {/* <label className="mb-2 block  font-semibold text-black">Product Cover Image</label>
           <input
             className="form-input mb-4 w-full border"
             type="file"
             onChange={handleCoverImageChange}
-          />
-          <label className="mb-2 block  font-semibold text-black">Product Images</label>
+          /> */}
+          <label className="mb-2 block  font-semibold text-black">
+            Product Images
+            <span className="text-red-500 ml-1">*</span>
+          </label>
+
           <input
             className="form-input mb-4 w-full border"
             type="file"
             onChange={handleProductImageChange}
             multiple
+            required
           />
           <label className="mb-2 block  font-semibold text-black">
             Do you want to show your contact details public?
+            <span className="text-red-500 ml-1">*</span>
+
           </label>
 
           <div className="mb-4 flex items-center space-x-4">

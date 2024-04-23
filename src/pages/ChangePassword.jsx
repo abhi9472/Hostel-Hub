@@ -41,26 +41,32 @@ function ChangePassword() {
   };
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h2 className="mb-6 text-3xl font-semibold text-center">Reset Password</h2>
-      <div className="max-w-md mx-auto bg-white shadow-md rounded-lg p-6">
-        <label className="mb-2 block text-gray-700">New Password:</label>
+    <div className="container mx-auto px-4 py-8 ">
+      <h2 className="mb-6 text-center text-3xl font-semibold shadow-lg">
+        Reset Password
+      </h2>
+      <div className="mx-auto mt-32 max-w-md rounded-lg bg-white p-6 shadow-lg">
+        <label className="mb-2 text-xl block font-bold text-gray-700">
+          New Password:
+        </label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="form-input mb-4 w-full border rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
+          className="form-input mb-4 w-full rounded-md border px-4 py-2 shadow-md focus:border-orange-500 focus:outline-none"
         />
-        <label className="mb-2 block text-gray-700">Confirm New Password:</label>
+        <label className="mb-2 text-xl block font-bold text-gray-700">
+          Confirm New Password:
+        </label>
         <input
           type="password"
           value={confirmPassword}
           onChange={(e) => setConfirmPassword(e.target.value)}
-          className="form-input mb-4 w-full border rounded-md px-4 py-2 focus:outline-none focus:border-blue-500"
+          className="form-input mb-4 w-full rounded-md border px-4 py-2 shadow-md focus:border-orange-500 focus:outline-none"
         />
         <button
           onClick={handleResetPassword}
-          className="rounded bg-blue-500 px-6 py-3 font-bold text-white hover:bg-blue-600 transition duration-300 ease-in-out"
+          className="rounded bg-blue-500 px-6 py-3 font-bold text-white shadow-md transition duration-300 ease-in-out hover:bg-blue-600"
         >
           Reset Password
         </button>

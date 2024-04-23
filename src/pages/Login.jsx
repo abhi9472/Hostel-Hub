@@ -73,14 +73,14 @@ function Login() {
     >
       <div className="bg-offwhite mt-[-120px] w-full max-w-xs p-8 shadow-md">
         <form onSubmit={handleLogin}>
-          <h2 className="mb-6 text-center text-2xl">Login</h2>
+          <h2 className="font bold mb-6 text-center text-2xl">Login</h2>
           {error && <p className="mb-2 text-xs italic text-red-500">{error}</p>}
           <div className="mb-4">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="text-x mb-2  block font-bold text-gray-700"
               htmlFor="username"
             >
-              Email-Official || UID 
+              Email-Official || UID
             </label>
             <input
               className="focus:shadow-outline w-full appearance-none rounded border px-3 py-2 leading-tight text-gray-700 shadow focus:outline-none"
@@ -94,7 +94,7 @@ function Login() {
           </div>
           <div className="mb-6">
             <label
-              className="mb-2 block text-sm font-bold text-gray-700"
+              className="text-x mb-2 block font-bold text-gray-700"
               htmlFor="password"
             >
               Password
@@ -125,10 +125,10 @@ function Login() {
             </button>
           </div>
           {!isLoggedIn && ( // Render signup link if not logged in
-            <p className="mt-4 text-center text-sm">
+            <p className="mt-4 text-center text-x">
               Don't have an account?{" "}
               <span
-                className="cursor-pointer text-blue-500"
+                className={"cursor-pointer text-red-500"}
                 onClick={handleSignUp}
               >
                 Sign Up

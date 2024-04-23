@@ -55,17 +55,17 @@ function VerifyForgotOtp() {
   };
 
   return (
-<div className="mx-auto mt-24 max-w-md rounded bg-white p-6 shadow-md">
-      <h2 className="mb-4 text-2xl">Enter OTP - Recieved On OutLook</h2>
+    <div className="mx-auto mt-40 max-w-md rounded bg-white p-6 shadow-lg">
+      <h2 className="mb-4 text-xl">Enter OTP - Recieved On OutLook</h2>
       <form onSubmit={handleVerifyOTP} className="space-y-4">
         <div>
-          <label className="mb-1 block font-medium text-gray-700">OTP:</label>
+          <label className="text-black-700 mb-1 block font-medium">OTP:</label>
           <input
             type="number"
             value={otp}
             onChange={handleOTPChange}
             required
-            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-blue-500"
+            className="w-full rounded-md border border-gray-300 px-3 py-2 placeholder-gray-400 focus:outline-none focus:ring focus:ring-orange-500"
           />
         </div>
         {error && <p className="text-red-500">{error}</p>}
@@ -76,8 +76,9 @@ function VerifyForgotOtp() {
           Verify OTP
         </button>
       </form>
-      <h2 className="mb-2 text-xl bg text-red-600">Check Spam-* If Spam Mark as not spam</h2>
-
+      <h2 className="bg mb-2 text-xl text-red-600">
+        Check Spam-* If Spam Mark as not spam
+      </h2>
     </div>
   );
 }

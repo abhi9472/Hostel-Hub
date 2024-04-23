@@ -13,6 +13,7 @@ function Profile() {
   const [newPriceData, setNewPriceData] = useState({}); // Store updated pric
   const [updatedProductNames, setUpdatedProductNames] = useState({}); // Store updated names for each product
   const [showUpdateNameInput, setShowUpdateNameInput] = useState(false);
+  const [showUpdatePhoneInput, setShowUpdatePhoneInput] = useState(false); // State for showing phone number input
 
   useEffect(() => {
     const userId = localStorage.getItem("user");
@@ -90,6 +91,16 @@ function Profile() {
             "https://hostelhub-backend.onrender.com/api/v1/info/updateHostel";
           data = { newHostel: newData };
           break;
+          case "phoneNumber":
+            const phoneNumber = newData.phoneNumber || "";
+            const isPhoneNumberValid = phoneNumber.length === 10;
+            if (isPhoneNumberValid) {
+              endpoint = "https://hostelhub-backend.onrender.com/api/v1/info/updatePhone";
+              data = { newPhone: phoneNumber };
+            } else {
+              console.error("Invalid phone number");
+            }
+            break;
         default:
           break;
       }
@@ -104,7 +115,7 @@ function Profile() {
       window.location.href = "/profile";
       fetchUserData();
     } catch (error) {
-      console.error("Error updating user data:", error);
+      console.error("Error updating user data:", error.response);
     }
   };
 
@@ -172,6 +183,36 @@ function Profile() {
             <option value="TAGORE">TAGORE</option>
           </select>
         );
+        case "phoneNumber":
+          return (
+            <div>
+              {showUpdatePhoneInput && (
+                <>
+                  <input
+                    type="text"
+                    placeholder="New Phone Number"
+                    value={newData.phoneNumber || ""}
+                    onChange={(e) => {
+                      const phoneNumber = e.target.value;
+                      if (/^\d{0,10}$/.test(phoneNumber)) {
+                        setNewData({ ...newData, phoneNumber });
+                      }
+                    }}
+                    style={{
+                      backgroundColor: "white",
+                      color: "black",
+                      border: "1px solid black",
+                    }}
+                    maxLength={10}
+                  />
+                  {newData.phoneNumber &&
+                    newData.phoneNumber.length !== 10 && (
+                      <p style={{ color: "red" }}>Please enter 10 digits.</p>
+                    )}
+                </>
+              )}
+            </div>
+        );
       default:
         return null;
     }
@@ -183,6 +224,11 @@ function Profile() {
     // Reset newData state when a new option is selected
     setNewData("");
     setNewData({ oldPassword: "", newPassword: "" });
+    if (option === "phoneNumber") {
+      setShowUpdatePhoneInput(true);
+    } else {
+      setShowUpdatePhoneInput(false); // Set showUpdatePhoneInput to true when selecting phoneNumber option
+    }
   };
 
   const handleSold = async (productId) => {
@@ -288,7 +334,7 @@ function Profile() {
   }
 
   return (
-    <div className="container mb-10 mt-20 mx-auto flex-col items-center justify-between gap-16 px-4 py-18">
+    <div className="py-18 container mx-auto mb-10 mt-20 flex-col items-center justify-between gap-16 px-4">
       {/* User information section */}
       <div className="relative flex items-center rounded-lg border bg-white p-6 shadow-lg">
         {/* User avatar */}
@@ -320,6 +366,8 @@ function Profile() {
           <option value="avatar">Avatar</option>
           <option value="password">Password</option>
           <option value="hostel">Hostel</option>
+          <option value="phoneNumber">Phone Number</option> {/* Add option for updating phone number */}
+
         </select>
         {/* Input field based on selected option */}
         {showInput && (
@@ -476,6 +524,8 @@ function Profile() {
                         border: "1px solid black",
                         width: "160px",
                       }}
+                      maxLength={10} 
+                      minLength={10} 
                     />
                     <button
                       onClick={() => handleUpdateProductName(product._id)}
