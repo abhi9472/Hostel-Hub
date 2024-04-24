@@ -122,10 +122,28 @@ function AddProduct() {
 
   const handleProductImageChange = (e) => {
     const files = e.target.files;
+    
+    // Check if the number of selected files exceeds 5
+    const totalSize = Array.from(files).reduce((acc, file) => acc + file.size, 0);
+
+  // Check if the total size exceeds 50 MB
+  if (totalSize > 50 * 1024 * 1024) { // 50 MB in bytes
+    alert("Total size of images exceeds 50 MB.");
+    // Clear the selected files to prevent further processing
+    e.target.value = null;
+    return;
+  }
+    if (files.length > 5) {
+      alert("You can only upload a maximum of 5 images.");
+      // Clear the selected files to prevent further processing
+      e.target.value = null;
+      return;
+    }
+    
+    // Convert the selected files to an array and update the state
     const newProductImgs = Array.from(files);
     setProductImgs(newProductImgs);
   };
-
   if (!isLoggedIn) {
     // Redirect user to login page if not logged in
     window.location.href = "/login";
