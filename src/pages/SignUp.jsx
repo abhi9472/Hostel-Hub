@@ -230,11 +230,16 @@ function SignUp() {
                 <option value="NekChand/Zakir">NekChand/Zakir</option>
                 <option value="SUKHNA">SUKHNA</option>
                 <option value="TAGORE">TAGORE</option>
+                <option value="LC">LC</option>
+                <option value="PG/Flat">PG/Flat</option>
+                <option value="Others">Others</option>
+
+
               </select>
             </div>
             <div>
               <label className="mb-1 block font-medium text-black-700">
-                Profile Picture || Optional:
+                Profile Picture:
               </label>
               <input
                 type="file"

@@ -122,6 +122,12 @@ function AddProduct() {
 
   const handleProductImageChange = (e) => {
     const files = e.target.files;
+    if (files.length < 2) {
+      alert("Please select at least 2 images.");
+      // Clear the selected files to prevent further processing
+      e.target.value = null;
+      return;
+    }
     
     // Check if the number of selected files exceeds 5
     const totalSize = Array.from(files).reduce((acc, file) => acc + file.size, 0);
