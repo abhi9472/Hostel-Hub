@@ -246,14 +246,14 @@ function AddProduct() {
 
           <div className="mb-4 flex items-center space-x-4">
             <button
-              className={`rounded bg-gray-300 px-4 py-2 hover:bg-gray-400 ${isAnonymous === 1 ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
-              onClick={() => setIsAnonymous(1)}
+              className={`rounded bg-gray-300 px-4 py-2 hover:bg-gray-400 ${isAnonymous === 0 ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
+              onClick={() => setIsAnonymous(0)}
             >
               Yes
             </button>
             <button
-              className={`rounded bg-gray-300 px-4 py-2 hover:bg-gray-400 ${isAnonymous === 0 ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
-              onClick={() => setIsAnonymous(0)}
+              className={`rounded bg-gray-300 px-4 py-2 hover:bg-gray-400 ${isAnonymous === 1 ? "bg-blue-500 text-white hover:bg-blue-600" : ""}`}
+              onClick={() => setIsAnonymous(1)}
             >
               No
             </button>
