@@ -227,7 +227,7 @@ function AddProduct() {
             onChange={handleCoverImageChange}
           /> */}
           <label className="mb-2 block  font-semibold text-black">
-            Product Images
+            Product Images -(min-2)
             <span className="text-red-500 ml-1">*</span>
           </label>
 
