@@ -1,8 +1,7 @@
-# React + Vite
+Chandigarh University Student Marketplace
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Welcome to the ultimate marketplace for Chandigarh University students! Our website provides a seamless platform for buying and selling items within the campus community. From textbooks to gadgets, furniture to fashion, find everything you need conveniently at your fingertips. Join our vibrant student marketplace and unlock endless opportunities to connect, save, and thrive at Chandigarh University!
 
-Currently, two official plugins are available:
+Project Description
+This project is designed to create a small marketplace specifically for Chandigarh University students. It allows students to buy and sell items online, making transactions convenient and efficient within the campus community.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
